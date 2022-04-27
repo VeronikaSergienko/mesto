@@ -9,44 +9,44 @@
 <body class="page">    
         <header class="header">
             <img src="./images/header-logo.svg" class="header__logo" alt="Логотип">
-            <div class="header__line"></div>
         </header>
 
         <main class="content">
             <section class="profile">
                 <img src="./images/profile-kusto.jpg" class="profile__avatar" alt="Аватар">
                 <div class="profile__profile-info">
-                    <h1 class="profile__title">Жак-Ив Кусто</h1>
-                    <p class="profile__subtitle">Исследователь океана</p>
+                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <p class="profile__type-of-activity">Исследователь океана</p>
                 </div>
-                <button class="profile__add-button">+</button>
+                <button type="button" class="profile__edit-button"></button>
+                <button type="button" class="profile__add-button"></button>
             </section>
 
             <section class="elements">
-                <div class="element">
+                <article class="element">
                     <img class="element__image" src="./images/elements-karachaevsk.jpg" alt="Карачаевск">
                     <p class="element__text">Карачаевск</p>
-                </div> 
-                <div class="element">
+                </article> 
+                <article class="element">
                     <img class="element__image" src="./images/elements-elbrus.jpg" alt="Гора Эльбрус">
                     <p class="element__text">Гора Эльбрус</p>
-                </div> 
-                <div class="element">
+                </article> 
+                <article class="element">
                     <img class="element__image" src="./images/elements-dombaj.jpg" alt="Домбай">
                     <p class="element__text">Домбай</p>
-                </div> 
-                <div class="element">
+                </article> 
+                <article class="element">
                     <img class="element__image" src="./images/elements-elbrus-2.jpg" alt="Гора Эльбрус">
                     <p class="element__text">Гора Эльбрус</p>
-                </div> 
-                <div class="element">
+                </article> 
+                <article class="element">
                     <img class="element__image" src="./images/elements-dombaj-2.jpg" alt="Домбай">
                     <p class="element__text">Домбай</p>
-                </div> 
-                <div class="element">
+                </article> 
+                <article class="element">
                     <img class="element__image" src="./images/elements-karachaevsk-2.jpg" alt="Карачаевск">
-                    <p class="element__text">Карачаево-Ч...</p>
-                </div> 
+                    <p class="element__text">Карачаево-Черкесская республика</p>
+                </article> 
             </section>
 
            
@@ -56,12 +56,15 @@
             </section>
 
             <section class="popup">
+                <button type="button" class="popup__clouse-button"></button>
                 <div class="popup__form">
-                    <p class="popup__text">Редактировать профиль</p>
-                    <button class="popup__save-button">Сохранить</button>
+                    <h2 class="popup__title">Редактировать профиль</h2>
+                    <input type="text" name="name" placeholder="Имя" class="input__name">
+                    <input type="text" name="type-of-activity" placeholder="Род деятельности" class="input__type-of-activity">
+                    <button type="button" class="popup__save-button">Сохранить</button>
                 </div>
             </section>
         </main>  
-    <script src="./script/script.js"></script>
+    <script src="./scripts/script.js"></script>
 </body>
 </html>

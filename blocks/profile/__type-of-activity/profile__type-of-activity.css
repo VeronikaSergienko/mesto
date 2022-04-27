@@ -1,14 +1,17 @@
-.profile__subtitle {
+.profile__type-of-activity {
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
     line-height: 22px;
+    margin: 0 auto 25px 0;
+    padding: 0;
 }
 
 @media screen and (max-width: 880px) {
-    .profile__subtitle {
+    .profile__type-of-activity {
         font-size: 14px;
         line-height: 17px;
         text-align: center;
+        margin-bottom: 0;
     }
 }
