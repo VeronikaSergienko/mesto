@@ -1,16 +1,11 @@
 .popup {
     box-sizing: border-box;
-    width: 430px;
-    height: 330px;
     position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
     left: 0;
     right: 0;
+    top: 0;
     bottom: 0;
-    border-radius: 10px;
-    border: 0.1px solid white;
-    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+    top: 195px;
+    left: 425px;
+    display: none;
 }

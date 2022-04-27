@@ -3,15 +3,16 @@
     font-weight: 500;
     font-size: 42px;
     line-height: 1.14;
-    margin: 22px auto 16px 0;
+    margin: 22px 18px 16px 0;
     padding: 0;
 }
 
-@media screen and (max-width: 880px) {
+@media screen and (max-width: 1046px) {
     .profile__name {
         font-size: 27px;
         line-height: 33px;
         text-align: center;
         margin-bottom: 14px;
+        margin-right: 10px;
     }
 }

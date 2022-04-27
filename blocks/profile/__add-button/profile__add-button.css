@@ -2,6 +2,7 @@
     box-sizing: border-box;
     width: 150px;
     height: 50px;
+    margin-left: auto;
     align-self: center;
     background-color: #000000;
     background-image: url(../../../images/plus.svg);
@@ -13,9 +14,10 @@
 
 .profile__add-button:hover {
     opacity: 0.6;
+    cursor: pointer;
 }
 
-@media screen and (max-width: 880px) {
+@media screen and (max-width: 1046px) {
     .profile__add-button {
         width: 100%;
         background-size: 16px;
