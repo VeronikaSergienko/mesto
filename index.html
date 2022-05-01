@@ -19,7 +19,7 @@
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
                         <button type="button" class="profile__edit-button"></button>
                     </div>                    
-                    <p class="profile__type-of-activity">Исследователь океана</p>
+                    <h2 class="profile__type-of-activity">Исследователь океана</h2>
                 </div>                
                 <button type="button" class="profile__add-button"></button>
             </section>
@@ -27,27 +27,45 @@
             <section class="elements">
                 <article class="element">
                     <img class="element__image" src="./images/elements-karachaevsk.jpg" alt="Карачаевск">
-                    <p class="element__text">Карачаевск</p>
+                    <div class="element__text-conteiner">
+                        <p class="element__text">Карачаевск</p>
+                        <button class="element__like-button"></button>
+                    </div>                    
                 </article> 
                 <article class="element">
                     <img class="element__image" src="./images/elements-elbrus.jpg" alt="Гора Эльбрус">
-                    <p class="element__text">Гора Эльбрус</p>
+                    <div class="element__text-conteiner">
+                        <p class="element__text">Гора Эльбрус</p>
+                        <button class="element__like-button"></button>
+                    </div>                    
                 </article> 
                 <article class="element">
                     <img class="element__image" src="./images/elements-dombaj.jpg" alt="Домбай">
-                    <p class="element__text">Домбай</p>
+                    <div class="element__text-conteiner">
+                        <p class="element__text">Домбай</p>
+                        <button class="element__like-button"></button>
+                    </div>                    
                 </article> 
                 <article class="element">
                     <img class="element__image" src="./images/elements-elbrus-2.jpg" alt="Гора Эльбрус">
-                    <p class="element__text">Гора Эльбрус</p>
+                    <div class="element__text-conteiner">
+                        <p class="element__text">Гора Эльбрус</p>
+                        <button class="element__like-button"></button>
+                    </div>                    
                 </article> 
                 <article class="element">
                     <img class="element__image" src="./images/elements-dombaj-2.jpg" alt="Домбай">
-                    <p class="element__text">Домбай</p>
+                    <div class="element__text-conteiner">
+                        <p class="element__text">Домбай</p>
+                        <button class="element__like-button"></button>
+                    </div>                    
                 </article> 
                 <article class="element">
                     <img class="element__image" src="./images/elements-karachaevsk-2.jpg" alt="Карачаевск">
-                    <p class="element__text">Карачаево-Черкесская республика</p>
+                    <div class="element__text-conteiner">
+                        <p class="element__text">Карачаево-Черкесская республика</p>
+                        <button class="element__like-button"></button>
+                    </div>                    
                 </article> 
             </section>
 
@@ -62,8 +80,8 @@
                     <button type="button" class="popup__clouse-button"></button>
                     <div class="popup__form">
                         <h2 class="popup__title">Редактировать профиль</h2>
-                        <input type="text" name="name" placeholder="Имя" class="popup__input">
-                        <input type="text" name="type-of-activity" placeholder="Род деятельности" class="popup__input">
+                        <input type="text" name="name" id="PopupName" placeholder="Имя" class="popup__input">
+                        <input type="text" name="type-of-activity" id="PopupTypeOfActivity" placeholder="Род деятельности" class="popup__input">
                         <button type="button" class="popup__save-button">Сохранить</button>
                     </div>
                 </div>                

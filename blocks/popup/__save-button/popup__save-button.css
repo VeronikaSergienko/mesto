@@ -10,6 +10,8 @@
     margin-top: 18px;
     width: 358px;
     height: 50px;
+    box-shadow: none;
+    border: none;
 }
 
 .popup__save-button:hover {
