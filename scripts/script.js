@@ -23,13 +23,13 @@ SaveButton.addEventListener("click", function(event) {
 });
 
 function openPopup() {
-    popup.classList.add('popup_active');
+    popup.classList.add('popup_opened');
     nameInput.value = ProfileName.textContent;
     jobInput.value = ProfileTypeOfActivity.textContent;
 }
 
 function clousePopup() {
-    popup.classList.remove('popup_active');
+    popup.classList.remove('popup_opened');
 }
 
 function formSubmitHandler (evt) {

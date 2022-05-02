@@ -3,14 +3,16 @@
     font-weight: normal;
     font-size: 18px;
     line-height: 22px;
+    height: 18px;
     margin: 0 auto 25px 0;
     padding: 0;
 }
 
-@media screen and (max-width: 880px) {
+@media screen and (max-width: 1046px) {
     .profile__type-of-activity {
         font-size: 14px;
         line-height: 17px;
+        height: 14px;
         text-align: center;
         margin-bottom: 0;
     }
