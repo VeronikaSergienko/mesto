@@ -1,16 +1,6 @@
 # Проект: Место
 ------------------------------------
 
-
-### Обзор
-
-* Figma
-* Картинки
-
-
-
-
-
 **Технологии**
 * Grid Layout
 * Figma
@@ -19,10 +9,11 @@
 * GIT
 * HTML5
 * CSS3
+* JavaScript
 
 **GitHub**
 
-* [Ссылка на проект](https://veronikasergienko.github.io/russian-travel/index.html)
+* [Ссылка на проект](https://veronikasergienko.github.io/mesto/index.html)
 
 **Figma**
 
