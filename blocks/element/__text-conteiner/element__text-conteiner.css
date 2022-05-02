@@ -1,6 +1,7 @@
 .element__text-conteiner {
     max-width: 246px;
-    margin: 25px 15px 31px 21px;
+    margin-top: 25px;
+    margin-left: 21px;
     box-sizing: border-box;
     display: flex;
 }
