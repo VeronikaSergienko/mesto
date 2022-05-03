@@ -8,7 +8,7 @@
     background-size: 10px;
     background-color: #000000;
     border: 1px solid #ffffff;
-    margin: auto 0 16px auto;
+    padding: 0;
 }
 
 .profile__edit-button:hover {
@@ -18,9 +18,9 @@
 
 @media screen and (max-width: 1046px) {
     .profile__edit-button {
+        margin-left: 10px;
         background-size: 7.5px;
         width: 18px;
         height: 18px;
-        margin-bottom: 14px;
     }
 }
