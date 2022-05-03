@@ -19,9 +19,12 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 880px) {
+@media screen and (max-width: 603px) {
     .popup__save-button {
         width: 238px;
         height: 46px;
+        margin-top: 15px;
+        font-size: 14px;
+        line-height: 17px;
     }
 }
