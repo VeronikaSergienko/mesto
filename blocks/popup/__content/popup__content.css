@@ -4,7 +4,6 @@
     align-items: center;
     position: relative;
     width: 430px;
-    height: 330px;
     background-color: #ffffff;
     border-radius: 10px;
     border: 0.1px solid white;
@@ -14,6 +13,5 @@
 @media screen and (max-width: 603px) {
     .popup__content {
         width: 282px;
-        height: 322px;
     }
 }
