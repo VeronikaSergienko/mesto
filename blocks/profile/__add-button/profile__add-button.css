@@ -4,7 +4,7 @@
     height: 50px;
     margin-left: auto;
     align-self: center;
-    background-color: #000000;
+    background: none;
     background-image: url(../../../images/plus.svg);
     background-size: 22px;
     background-repeat: no-repeat;
