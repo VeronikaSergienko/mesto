@@ -16,8 +16,8 @@
                 <img src="./images/profile-kusto.jpg" class="profile__avatar" alt="Аватар">
                 <div class="profile__profile-info">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
-                    <button type="button" class="profile__edit-button"></button>                                     
-                    <h2 class="profile__type-of-activity">Исследователь океана</h2>
+                    <button aria-label="открытьФорму" type="button" class="profile__edit-button"></button>                                     
+                    <p class="profile__type-of-activity">Исследователь океана</p>
                 </div>                
                 <button type="button" class="profile__add-button"></button>
             </section>
@@ -26,63 +26,63 @@
                 <article class="element">
                     <img class="element__image" src="./images/elements-karachaevsk.jpg" alt="Карачаевск">
                     <div class="element__text-conteiner">
-                        <p class="element__text">Карачаевск</p>
-                        <button class="element__like-button"></button>
+                        <h2 class="element__text">Карачаевск</h2>
+                        <button type="button" class="element__like-button"></button>
                     </div>                    
                 </article> 
                 <article class="element">
                     <img class="element__image" src="./images/elements-elbrus.jpg" alt="Гора Эльбрус">
                     <div class="element__text-conteiner">
-                        <p class="element__text">Гора Эльбрус</p>
-                        <button class="element__like-button"></button>
+                        <h2 class="element__text">Гора Эльбрус</h2>
+                        <button type="button" class="element__like-button"></button>
                     </div>                    
                 </article> 
                 <article class="element">
                     <img class="element__image" src="./images/elements-dombaj.jpg" alt="Домбай">
                     <div class="element__text-conteiner">
-                        <p class="element__text">Домбай</p>
-                        <button class="element__like-button"></button>
+                        <h2 class="element__text">Домбай</h2>
+                        <button type="button" class="element__like-button"></button>
                     </div>                    
                 </article> 
                 <article class="element">
                     <img class="element__image" src="./images/elements-elbrus-2.jpg" alt="Гора Эльбрус">
                     <div class="element__text-conteiner">
-                        <p class="element__text">Гора Эльбрус</p>
-                        <button class="element__like-button"></button>
+                        <h2 class="element__text">Гора Эльбрус</h2>
+                        <button type="button" class="element__like-button"></button>
                     </div>                    
                 </article> 
                 <article class="element">
                     <img class="element__image" src="./images/elements-dombaj-2.jpg" alt="Домбай">
                     <div class="element__text-conteiner">
-                        <p class="element__text">Домбай</p>
-                        <button class="element__like-button"></button>
+                        <h2 class="element__text">Домбай</h2>
+                        <button type="button" class="element__like-button"></button>
                     </div>                    
                 </article> 
                 <article class="element">
                     <img class="element__image" src="./images/elements-karachaevsk-2.jpg" alt="Карачаевск">
                     <div class="element__text-conteiner">
-                        <p class="element__text">Карачаево-Черкесская республика</p>
-                        <button class="element__like-button"></button>
+                        <h2 class="element__text">Карачаево-Черкесская республика</h2>
+                        <button type="button" class="element__like-button"></button>
                     </div>                    
                 </article> 
             </section>           
-          
-            <section class="footer">
-                <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
-            </section>
 
             <div class="popup">
                 <div class="popup__content">
-                    <button type="button" class="popup__clouse-button"></button>
-                    <div class="popup__form">
-                        <h2 class="popup__title">Редактировать профиль</h2>
-                        <input type="text" name="name" id="PopupName" placeholder="Имя" class="popup__input">
-                        <input type="text" name="type-of-activity" id="PopupTypeOfActivity" placeholder="Род деятельности" class="popup__input">
-                        <button type="button" class="popup__save-button">Сохранить</button>
-                    </div>
+                    <button aria-label="close" type="button" class="popup__clouse-button"></button>                    
+                    <form class="popup__form" name="user">
+                        <h2 class="popup__title">Редактировать профиль</h2>               
+                        <input type="text" name="name" id="popupName" placeholder="Имя" class="popup__input">
+                        <input type="text" name="type-of-activity" id="popupTypeOfActivity" placeholder="Род деятельности" class="popup__input">
+                        <button type="submit" class="popup__save-button">Сохранить</button>
+                    </form>
                 </div>                
             </div>
         </main>  
+                  
+        <footer class="footer">
+            <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+        </footer>
     <script src="./scripts/script.js"></script>
 </body>
 </html>

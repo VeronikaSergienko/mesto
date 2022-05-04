@@ -1,7 +1,6 @@
 .popup__form {
     box-sizing: border-box;
     width: 430px;
-    height: 330px;
     padding: 34px 36px 37px;
     margin: 0;
     display: flex;

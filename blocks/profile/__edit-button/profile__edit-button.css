@@ -2,11 +2,11 @@
     box-sizing: border-box;
     width: 24px;
     height: 24px;
+    background: none;
     background-image: url(../../../images/pen.svg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 10px;
-    background-color: #000000;
     border: 1px solid #ffffff;
     padding: 0;
 }
