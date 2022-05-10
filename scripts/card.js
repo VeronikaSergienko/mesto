@@ -1,8 +1,5 @@
 const cardTemplate = document.querySelector('#card').content;
-
-const card = cardTemplate.querySelector('.element').cloneNode(true);
-
-console.log(card);
+const elements = document.querySelector('.elements');
 
 const initialCards = [
     {
@@ -30,3 +27,12 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
   ]; 
+
+  initialCards.forEach((item) => {
+    const card = cardTemplate.querySelector('.element').cloneNode(true);
+    card.querySelector('.element__text').textContent = item.name;
+    const img = card.querySelector('.element__image');
+    img.src = item.link;
+    img.alt = `Фото ${item.name}.`;
+    elements.prepend(card);
+  });
