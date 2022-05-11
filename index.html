@@ -23,7 +23,7 @@
             </section>
 
             <section class="elements">
-                <article class="element">
+                <!-- <article class="element">
                     <img class="element__image" src="./images/elements-karachaevsk.jpg" alt="Карачаевск">
                     <div class="element__text-conteiner">
                         <h2 class="element__text">Карачаевск</h2>
@@ -64,7 +64,7 @@
                         <h2 class="element__text">Карачаево-Черкесская республика</h2>
                         <button type="button" class="element__like-button"></button>
                     </div>                    
-                </article> 
+                </article>  -->
             </section>           
 
             <div class="popup">
@@ -75,6 +75,18 @@
                         <input type="text" name="name" id="popupName" placeholder="Имя" class="popup__input">
                         <input type="text" name="type-of-activity" id="popupTypeOfActivity" placeholder="Род деятельности" class="popup__input">
                         <button type="submit" class="popup__save-button">Сохранить</button>
+                    </form>
+                </div>                
+            </div>
+
+            <div class="popup">
+                <div class="popup__content">
+                    <button aria-label="close" type="button" class="popup__clouse-button"></button>                    
+                    <form class="popup__form" name="new-place">
+                        <h2 class="popup__title">Новое место</h2>               
+                        <input type="text" name="place-name" id="place-name" placeholder="Название" class="popup__input">
+                        <input type="text" name="link-to-the-picture" id="link-to-the-picture" placeholder="Ссылка на картинку" class="popup__input">
+                        <button type="submit" class="popup__save-button">Создать</button>
                     </form>
                 </div>                
             </div>
