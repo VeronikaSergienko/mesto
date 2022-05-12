@@ -70,7 +70,7 @@
             <div class="popup popup_type_edit-profile">
                 <div class="popup__content">
                     <button aria-label="close" type="button" class="popup__clouse-button"></button>                    
-                    <form class="popup__form" name="user">
+                    <form class="popup__form popup__form_profile" name="user">
                         <h2 class="popup__title">Редактировать профиль</h2>               
                         <input type="text" name="name" id="popupName" placeholder="Имя" class="popup__input">
                         <input type="text" name="type-of-activity" id="popupTypeOfActivity" placeholder="Род деятельности" class="popup__input">
@@ -82,7 +82,7 @@
             <div class="popup popup_type_new-place">
                 <div class="popup__content">
                     <button aria-label="close" type="button" class="popup__clouse-button"></button>                    
-                    <form class="popup__form" name="new-place">
+                    <form class="popup__form popup__form_place" name="new-place">
                         <h2 class="popup__title">Новое место</h2>               
                         <input type="text" name="place-name" id="place-name" placeholder="Название" class="popup__input">
                         <input type="text" name="link-to-the-picture" id="link-to-the-picture" placeholder="Ссылка на картинку" class="popup__input">
@@ -93,6 +93,7 @@
 
             <div class="popup popup_type_place_image">
                 <div class="popup__content">
+                    <button aria-label="close" type="button" class="popup__clouse-button"></button> 
                     <img class="popup__place-image" src="#" alt="Картинка">
                     <p class="popup__place-title">Название места</p>
                 </div>                
