@@ -67,7 +67,7 @@
                 </article>  -->
             </section>           
 
-            <div class="popup">
+            <div class="popup popup_type_edit-profile">
                 <div class="popup__content">
                     <button aria-label="close" type="button" class="popup__clouse-button"></button>                    
                     <form class="popup__form" name="user">
@@ -79,7 +79,7 @@
                 </div>                
             </div>
 
-            <div class="popup">
+            <div class="popup popup_type_new-place">
                 <div class="popup__content">
                     <button aria-label="close" type="button" class="popup__clouse-button"></button>                    
                     <form class="popup__form" name="new-place">
@@ -93,13 +93,14 @@
         </main>  
 
         <template id="card">
-            <div class="element">
+            <article class="element">
+                <button class="element__delete-button"></button>
                 <img class="element__image" src="#">
                 <div class="element__text-conteiner">
                     <h2 class="element__text"></h2>
                     <button type="button" class="element__like-button"></button>
                 </div>
-            </div>
+            </article>
         </template>
                   
         <footer class="footer">

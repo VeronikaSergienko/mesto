@@ -1,5 +1,7 @@
 let editButton = document.querySelector('.profile__edit-button');
 let popup = document.querySelector('.popup');
+let popupEditProfile = document.querySelector('.popup_type_edit-profile');
+let popupAddPlace = document.querySelector('.popup_type_new-place');
 let formElement = document.querySelector('.popup__form');
 let clouseButton = document.querySelector('.popup__clouse-button');
 let profileName = document.querySelector('.profile__name');
@@ -76,11 +78,17 @@ const initialCards = [
     card.querySelector('.element__like-button').addEventListener("click", function(evt) {
       evt.target.classList.toggle('element__like-button_active');
   });
+
+      // удаление карточки
+    card.querySelector('.element__delete-button').addEventListener("click", function(evt) {
+      const place = evt.target.closest('.element');
+      place.remove();
+    });
+
   // добавление карточки в начало
     elements.prepend(card);
   });
 
-  
 
   // открытие попапа создания карточки
   const addButton = document.querySelector('.profile__add-button');
