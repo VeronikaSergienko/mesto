@@ -15,30 +15,28 @@ let placeName = document.querySelector('#place-name');
 let linkToThePicture = document.querySelector('#link-to-the-picture');
 const addButton = document.querySelector('.profile__add-button');
 const elements = document.querySelector('.elements');
+const placeImg = popupPlaceImage.querySelector('img');
 
 // попап профиля
-
+editButton.addEventListener("click", openPopupProfile);
 // функция открытия формы редактирования профиля
 function openPopupProfile() {
-    popupEditProfile.classList.add('popup_opened');
+    openPopup(popupEditProfile);
     nameInput.value = profileName.textContent;
     jobInput.value = profileTypeOfActivity.textContent;
 };
 
-// функция закрытия формы нажатием на "крестик"
-function clousePopup() {
-    popup.classList.remove('popup_opened');
-};
+
 
 // Обработчик «отправки» формы
 function submitFormHandlerProfile (evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileTypeOfActivity.textContent = jobInput.value;
-    clousePopup();
+    clousePopup(popupEditProfile);
 };
 
-editButton.addEventListener("click", openPopupProfile);
+
 
 clouseButton.addEventListener("click", clousePopup);
 
@@ -47,13 +45,10 @@ formProfile.addEventListener('submit', submitFormHandlerProfile);
 
 // 
 
-// попап создания карточки
+// попап создания карточки-------------------------------------------------------------
 
-// 
-// открытие формы
-function openPopupNewPlace() {
-    popupAddPlace.classList.add('popup_opened');
-  };
+// __________________________________________________________________________________
+
 
   addButton.addEventListener('click', openPopupNewPlace);
 
@@ -85,6 +80,7 @@ function openPopupNewPlace() {
 
   // добавление карточки в начало
     elements.prepend(card);
+    evt.target.reset();
     popupAddPlace.classList.remove('popup_opened');
   };
 
@@ -92,9 +88,9 @@ function openPopupNewPlace() {
 
 formPlace.addEventListener('submit', submitTheFormNewPlace);
 
-//   
+//_____________________________________________________________________________________
 
-// создание карточек
+// создание карточек------------------------------------------------------------
 
 
 const cardTemplate = document.querySelector('#card').content;
@@ -120,7 +116,8 @@ initialCards.forEach((item) => {
 
     // слушатель картинки для открытия в отдельном окне
     img.addEventListener("click", function(evt) {
-        popupPlaceImage.classList.add('popup_opened');    
+        popupPlaceImage.classList.add('popup_opened');
+        placeImg.src = img.src;
       console.log('кликнули на картинку');
     });
 
@@ -129,7 +126,47 @@ initialCards.forEach((item) => {
   });
 
 
-// 
+// ----------------------------------------------------------------------------------
+// ________________________________________________________________________________________
+
+function openPopup (elem) {
+    elem.classList.add('popup_opened');
+    console.log('открыли попап');
+};
+
+function clousePopup () {
+    popup.classList.remove('popup_opened');
+    console.log('закрыли попап');
+};
 
 
-  
+
+
+
+
+
+// функция закрытия формы нажатием на "крестик"
+// function clousePopup() {
+//     popup.classList.remove('popup_opened');
+// };
+
+  // открытие формы
+function openPopupNewPlace() {
+    popupAddPlace.classList.add('popup_opened');
+  };
+
+// ______________закрытие формы на крестик нажав
+  function clousePopupNewPlace() {
+    popupAddPlace.classList.remove('popup_opened');
+  };
+
+  const clouseFormNewPlace = popupAddPlace.querySelector('.popup__clouse-button').addEventListener('click', clousePopupNewPlace);
+
+// ______________закрытие попапас картинкой нажатием на крестик
+const clousePopupImage = popupPlaceImage.querySelector('.popup__clouse-button').addEventListener('click', clousePopupImg);
+function clousePopupImg() {
+    popupPlaceImage.classList.remove('popup_opened');
+  };
+
+//   ------------------------------------------------------------------------
+// _________________a
