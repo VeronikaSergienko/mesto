@@ -117,7 +117,8 @@ initialCards.forEach((item) => {
     // слушатель картинки для открытия в отдельном окне
     img.addEventListener("click", function(evt) {
         popupPlaceImage.classList.add('popup_opened');
-        placeImg.src = img.src;
+        placeImg.src = item.link;
+        placeImg.alt = item.name;
       console.log('кликнули на картинку');
     });
 
