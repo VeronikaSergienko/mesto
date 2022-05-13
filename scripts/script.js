@@ -17,6 +17,18 @@ const addButton = document.querySelector('.profile__add-button');
 const elements = document.querySelector('.elements');
 const placeImg = popupPlaceImage.querySelector('img');
 
+
+function openPopup (elem) {
+    elem.classList.add('popup_opened');
+    console.log('открыли попап');
+};
+
+function clousePopup () {
+    popup.classList.remove('popup_opened');
+    console.log('закрыли попап');
+};
+
+
 // попап профиля
 editButton.addEventListener("click", openPopupProfile);
 // функция открытия формы редактирования профиля
@@ -97,6 +109,7 @@ const cardTemplate = document.querySelector('#card').content;
 
 // создание карточки
 
+/*
 initialCards.forEach((item) => {
     const card = cardTemplate.querySelector('.element').cloneNode(true);
     card.querySelector('.element__text').textContent = item.name;
@@ -125,20 +138,32 @@ initialCards.forEach((item) => {
   // добавление карточки в начало
     elements.prepend(card);
   });
-
+*/
 
 // ----------------------------------------------------------------------------------
 // ________________________________________________________________________________________
-
-function openPopup (elem) {
-    elem.classList.add('popup_opened');
-    console.log('открыли попап');
+const makeCard = (item) => {
+    const card = cardTemplate.querySelector('.element').cloneNode(true);
+    card.querySelector('.element__text').textContent = item.name;
+    const img = card.querySelector('.element__image');
+    img.src = item.link;
+    img.alt = `Фото ${item.name}.`;
+    card.querySelector('.element__like-button').addEventListener("click", function(evt) {
+        evt.target.classList.toggle('element__like-button_active');
+    });
+    card.querySelector('.element__delete-button').addEventListener("click", function(evt) {
+            const place = evt.target.closest('.element');
+            place.remove();
+          });
+    img.addEventListener("click", function(evt) {
+            popupPlaceImage.classList.add('popup_opened');
+            placeImg.src = item.link;
+            placeImg.alt = item.name;
+        });
+    elements.prepend(card);
 };
 
-function clousePopup () {
-    popup.classList.remove('popup_opened');
-    console.log('закрыли попап');
-};
+initialCards.forEach(makeCard);
 
 
 
@@ -164,6 +189,7 @@ function openPopupNewPlace() {
   const clouseFormNewPlace = popupAddPlace.querySelector('.popup__clouse-button').addEventListener('click', clousePopupNewPlace);
 
 // ______________закрытие попапас картинкой нажатием на крестик
+
 const clousePopupImage = popupPlaceImage.querySelector('.popup__clouse-button').addEventListener('click', clousePopupImg);
 function clousePopupImg() {
     popupPlaceImage.classList.remove('popup_opened');
