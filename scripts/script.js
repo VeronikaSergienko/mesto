@@ -16,6 +16,7 @@ let linkToThePicture = document.querySelector('#link-to-the-picture');
 const addButton = document.querySelector('.profile__add-button');
 const elements = document.querySelector('.elements');
 const placeImg = popupPlaceImage.querySelector('img');
+const placeTitle = popupPlaceImage.querySelector('.popup__place-title');
 
 
 function openPopup (elem) {
@@ -72,7 +73,7 @@ formProfile.addEventListener('submit', submitFormHandlerProfile);
     card.querySelector('.element__text').textContent = placeName.value;
     const img = card.querySelector('.element__image');
     img.src = linkToThePicture.value;
-    img.alt = placeName.value;;
+    img.alt = placeName.value;
     // переключатель для лайка
     card.querySelector('.element__like-button').addEventListener("click", function(evt) {
       evt.target.classList.toggle('element__like-button_active');
@@ -85,10 +86,14 @@ formProfile.addEventListener('submit', submitFormHandlerProfile);
     });
 
     // слушатель картинки для открытия в отдельном окне
-    img.addEventListener("click", function(evt) {
-        popupPlaceImage.classList.add('popup_opened');    
-      console.log('кликнули на картинку');
-    });
+    img.addEventListener("click", (evt) => {
+        const clickimg = evt.target;
+        placeImg.src = clickimg.src;
+        placeImg.alt = clickimg.alt;
+        placeTitle.textContent = clickimg.alt;
+        popupPlaceImage.classList.add('popup_opened');
+        console.log(clickimg);
+        });
 
   // добавление карточки в начало
     elements.prepend(card);
@@ -102,63 +107,37 @@ formPlace.addEventListener('submit', submitTheFormNewPlace);
 
 //_____________________________________________________________________________________
 
+const submitNewCard = (name, link) => {
+
+}
+
 // создание карточек------------------------------------------------------------
 
 
 const cardTemplate = document.querySelector('#card').content;
 
 // создание карточки
-
-/*
-initialCards.forEach((item) => {
-    const card = cardTemplate.querySelector('.element').cloneNode(true);
-    card.querySelector('.element__text').textContent = item.name;
-    const img = card.querySelector('.element__image');
-    img.src = item.link;
-    img.alt = `Фото ${item.name}.`;
-    // переключатель для лайка
-    card.querySelector('.element__like-button').addEventListener("click", function(evt) {
-      evt.target.classList.toggle('element__like-button_active');
-  });
-
-      // удаление карточки
-    card.querySelector('.element__delete-button').addEventListener("click", function(evt) {
-      const place = evt.target.closest('.element');
-      place.remove();
-    });
-
-    // слушатель картинки для открытия в отдельном окне
-    img.addEventListener("click", function(evt) {
-        popupPlaceImage.classList.add('popup_opened');
-        placeImg.src = item.link;
-        placeImg.alt = item.name;
-      console.log('кликнули на картинку');
-    });
-
-  // добавление карточки в начало
-    elements.prepend(card);
-  });
-*/
-
-// ----------------------------------------------------------------------------------
-// ________________________________________________________________________________________
+// ____________________________________________________________________________________
 const makeCard = (item) => {
     const card = cardTemplate.querySelector('.element').cloneNode(true);
     card.querySelector('.element__text').textContent = item.name;
     const img = card.querySelector('.element__image');
     img.src = item.link;
-    img.alt = `Фото ${item.name}.`;
-    card.querySelector('.element__like-button').addEventListener("click", function(evt) {
-        evt.target.classList.toggle('element__like-button_active');
-    });
-    card.querySelector('.element__delete-button').addEventListener("click", function(evt) {
+    img.alt = item.name;
+    card.querySelector('.element__like-button').addEventListener("click", (evt) => {
+            evt.target.classList.toggle('element__like-button_active');
+        });
+    card.querySelector('.element__delete-button').addEventListener("click", (evt) => {
             const place = evt.target.closest('.element');
             place.remove();
-          });
-    img.addEventListener("click", function(evt) {
-            popupPlaceImage.classList.add('popup_opened');
-            placeImg.src = item.link;
-            placeImg.alt = item.name;
+        });
+    img.addEventListener("click", (evt) => {
+        const clickimg = evt.target;
+        placeImg.src = clickimg.src;
+        placeImg.alt = clickimg.alt;
+        placeTitle.textContent = clickimg.alt;
+        popupPlaceImage.classList.add('popup_opened');
+        console.log(clickimg);
         });
     elements.prepend(card);
 };
@@ -182,7 +161,8 @@ function openPopupNewPlace() {
   };
 
 // ______________закрытие формы на крестик нажав
-  function clousePopupNewPlace() {
+  function clousePopupNewPlace(evt) {
+      console.log(evt.target);
     popupAddPlace.classList.remove('popup_opened');
   };
 
