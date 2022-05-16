@@ -1,9 +1,7 @@
 const editButton = document.querySelector('.profile__edit-button');
-const popup = document.querySelector('.popup');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupAddPlace = document.querySelector('.popup_type_new-place');
 const popupPlaceImage = document.querySelector('.popup_type_place-image');
-const formElement = document.querySelector('.popup__form');
 const formProfile = document.querySelector('.popup__form_profile');
 const formPlace = document.querySelector('.popup__form_place');
 const profileName = document.querySelector('.profile__name');
@@ -17,28 +15,27 @@ const elements = document.querySelector('.elements');
 const placeImg = popupPlaceImage.querySelector('img');
 const placeTitle = popupPlaceImage.querySelector('.popup__place-title');
 const cardTemplate = document.querySelector('#card').content;
-const clouseButton = document.querySelector('.popup__clouse-button');
 
 // универсальные функции открытия и закрытия профиля
-function openAllPopup (namePopap) {
+function openPopup (namePopap) {
   namePopap.classList.add('popup_opened');
 };
 
-function clouseAllPopup (namePopap) {
+function clousePopup (namePopap) {
   namePopap.classList.remove('popup_opened');
 };
 
 // закрытия попапов
-clouseButton.addEventListener("click", function(evt) {
-  clouseAllPopup(popupEditProfile);
+const popupProfileCloseButton = popupEditProfile.querySelector('.popup__clouse-button').addEventListener("click", (evt) => {
+    clousePopup(popupEditProfile);
+  });
+
+const popupImageCloseButton = popupPlaceImage.querySelector('.popup__clouse-button').addEventListener('click', (evt) => {
+  clousePopup(popupPlaceImage);
 });
 
-const clousePopupImage = popupPlaceImage.querySelector('.popup__clouse-button').addEventListener('click', (evt) => {
-  clouseAllPopup(popupPlaceImage);
-});
-
-const clouseFormNewPlace = popupAddPlace.querySelector('.popup__clouse-button').addEventListener('click', (evt) => {
-  clouseAllPopup(popupAddPlace);
+const popupNewPlaceCloseButton = popupAddPlace.querySelector('.popup__clouse-button').addEventListener('click', (evt) => {
+  clousePopup(popupAddPlace);
 });
 
 // внесение данных в форму редактирования профиля из профиля
@@ -49,7 +46,7 @@ function openPopupProfile() {
 
 // открытие формы редактирования профиля при клике на кнопку
 editButton.addEventListener("click", function(evt) {
-  openAllPopup(popupEditProfile);
+  openPopup(popupEditProfile);
   openPopupProfile();
 });
 
@@ -58,7 +55,7 @@ function submitFormHandlerProfile (evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileTypeOfActivity.textContent = jobInput.value;
-    clouseAllPopup(popupEditProfile);
+    clousePopup(popupEditProfile);
 };
 
 // Прикрепляем обработчик отправки к форме редактирования профиля
@@ -66,7 +63,7 @@ formProfile.addEventListener('submit', submitFormHandlerProfile);
 
 // открытие формы создания новой карточки
   addButton.addEventListener('click', (evt) => {
-      openAllPopup(popupAddPlace);
+      openPopup(popupAddPlace);
     });
 
 // создание новой карточки
@@ -88,25 +85,31 @@ const makeCard = (item) => {
       placeImg.src = clickimg.src;
       placeImg.alt = clickimg.alt;
       placeTitle.textContent = clickimg.alt;
-      openAllPopup(popupPlaceImage);
+      openPopup(popupPlaceImage);
       });
-  elements.prepend(card);
+  return card;
+};
+
+// добавление карточки
+function addCard(item) {
+  const newCard = makeCard(item);
+  elements.prepend(newCard);
 };
 
 // обработчик отправки формы нового места
   function submitTheFormNewPlace (evt) {
     evt.preventDefault();
-    let item = {};
+    const item = {};
     item.name = placeName.value;
     item.link = linkToThePicture.value;
     console.log(item);
-    makeCard(item);
+    addCard(item);
     evt.target.reset();
-    clouseAllPopup(popupAddPlace);
+    clousePopup(popupAddPlace);
   };
 
 //   прикрепляем к форме обработчик
 formPlace.addEventListener('submit', submitTheFormNewPlace);
 
 // создание карточек перебором из массива
-initialCards.forEach(makeCard);
+initialCards.forEach(addCard);
