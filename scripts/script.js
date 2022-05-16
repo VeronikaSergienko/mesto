@@ -19,6 +19,7 @@ const placeImg = popupPlaceImage.querySelector('img');
 const placeTitle = popupPlaceImage.querySelector('.popup__place-title');
 
 
+
 function openPopup (elem) {
     elem.classList.add('popup_opened');
     console.log('открыли попап');
@@ -69,34 +70,37 @@ formProfile.addEventListener('submit', submitFormHandlerProfile);
   // обработчик отправки формы нового места
   function submitTheFormNewPlace (evt) {
     evt.preventDefault();
+    let item = {};
+    item.name = placeName.value;
+    item.link = linkToThePicture.value;
     const card = cardTemplate.querySelector('.element').cloneNode(true);
-    card.querySelector('.element__text').textContent = placeName.value;
+    card.querySelector('.element__text').textContent = item.name;
     const img = card.querySelector('.element__image');
-    img.src = linkToThePicture.value;
-    img.alt = placeName.value;
-    // переключатель для лайка
-    card.querySelector('.element__like-button').addEventListener("click", function(evt) {
-      evt.target.classList.toggle('element__like-button_active');
-  });
-
-      // удаление карточки
-    card.querySelector('.element__delete-button').addEventListener("click", function(evt) {
-      const place = evt.target.closest('.element');
-      place.remove();
-    });
-
-    // слушатель картинки для открытия в отдельном окне
-    img.addEventListener("click", (evt) => {
-        const clickimg = evt.target;
-        placeImg.src = clickimg.src;
-        placeImg.alt = clickimg.alt;
-        placeTitle.textContent = clickimg.alt;
-        popupPlaceImage.classList.add('popup_opened');
-        console.log(clickimg);
-        });
-
-  // добавление карточки в начало
-    elements.prepend(card);
+    img.src = item.link;
+    img.alt = item.name;
+            // переключатель для лайка
+            card.querySelector('.element__like-button').addEventListener("click", (evt) => {
+              evt.target.classList.toggle('element__like-button_active');
+          });
+      
+        // удаление карточки
+      card.querySelector('.element__delete-button').addEventListener("click", (evt) => {
+              const place = evt.target.closest('.element');
+              place.remove();
+          });
+      
+      // слушатель картинки для открытия в отдельном окне
+      img.addEventListener("click", (evt) => {
+          const clickimg = evt.target;
+          placeImg.src = clickimg.src;
+          placeImg.alt = clickimg.alt;
+          placeTitle.textContent = clickimg.alt;
+          popupPlaceImage.classList.add('popup_opened');
+          console.log(clickimg);
+          });
+      
+      // добавление карточки в начало
+      elements.prepend(card);
     evt.target.reset();
     popupAddPlace.classList.remove('popup_opened');
   };
@@ -104,6 +108,7 @@ formProfile.addEventListener('submit', submitFormHandlerProfile);
 //   прикрепляем к форме обработчик
 
 formPlace.addEventListener('submit', submitTheFormNewPlace);
+
 
 //_____________________________________________________________________________________
 
