@@ -41,18 +41,17 @@ const clouseFormNewPlace = popupAddPlace.querySelector('.popup__clouse-button').
   clouseAllPopup(popupAddPlace);
 });
 
+// внесение данных в форму редактирования профиля из профиля
+function openPopupProfile() {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileTypeOfActivity.textContent;
+};
 
 // открытие формы редактирования профиля при клике на кнопку
 editButton.addEventListener("click", function(evt) {
   openAllPopup(popupEditProfile);
   openPopupProfile();
 });
-
-// внесение данных в форму редактирования профиля из профиля
-function openPopupProfile() {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileTypeOfActivity.textContent;
-};
 
 // Обработчик «отправки» формы редактирования профиля
 function submitFormHandlerProfile (evt) {
@@ -70,8 +69,31 @@ formProfile.addEventListener('submit', submitFormHandlerProfile);
       openAllPopup(popupAddPlace);
     });
 
+// создание новой карточки
+const makeCard = (item) => {
+  const card = cardTemplate.querySelector('.element').cloneNode(true);
+  card.querySelector('.element__text').textContent = item.name;
+  const img = card.querySelector('.element__image');
+  img.src = item.link;
+  img.alt = item.name;
+  card.querySelector('.element__like-button').addEventListener("click", (evt) => {
+          evt.target.classList.toggle('element__like-button_active');
+      });
+  card.querySelector('.element__delete-button').addEventListener("click", (evt) => {
+          const place = evt.target.closest('.element');
+          place.remove();
+      });
+  img.addEventListener("click", (evt) => {
+      const clickimg = evt.target;
+      placeImg.src = clickimg.src;
+      placeImg.alt = clickimg.alt;
+      placeTitle.textContent = clickimg.alt;
+      openAllPopup(popupPlaceImage);
+      });
+  elements.prepend(card);
+};
 
-  // обработчик отправки формы нового места
+// обработчик отправки формы нового места
   function submitTheFormNewPlace (evt) {
     evt.preventDefault();
     let item = {};
@@ -85,30 +107,6 @@ formProfile.addEventListener('submit', submitFormHandlerProfile);
 
 //   прикрепляем к форме обработчик
 formPlace.addEventListener('submit', submitTheFormNewPlace);
-
-// создание новой карточки
-const makeCard = (item) => {
-    const card = cardTemplate.querySelector('.element').cloneNode(true);
-    card.querySelector('.element__text').textContent = item.name;
-    const img = card.querySelector('.element__image');
-    img.src = item.link;
-    img.alt = item.name;
-    card.querySelector('.element__like-button').addEventListener("click", (evt) => {
-            evt.target.classList.toggle('element__like-button_active');
-        });
-    card.querySelector('.element__delete-button').addEventListener("click", (evt) => {
-            const place = evt.target.closest('.element');
-            place.remove();
-        });
-    img.addEventListener("click", (evt) => {
-        const clickimg = evt.target;
-        placeImg.src = clickimg.src;
-        placeImg.alt = clickimg.alt;
-        placeTitle.textContent = clickimg.alt;
-        openAllPopup(popupPlaceImage);
-        });
-    elements.prepend(card);
-};
 
 // создание карточек перебором из массива
 initialCards.forEach(makeCard);
