@@ -18,39 +18,16 @@ const placeImg = popupPlaceImage.querySelector('img');
 const placeTitle = popupPlaceImage.querySelector('.popup__place-title');
 const clouseButton = document.querySelector('.popup__clouse-button');
 
+// универсальные функции открытия и закрытия профиля
 function openAllPopup (namePopap) {
   namePopap.classList.add('popup_opened');
   console.log('открыли попап общей функцией');
-}
+};
 
 function clouseAllPopup (namePopap) {
   namePopap.classList.remove('popup_opened');
   console.log('закрыли попап общей функцией');
-}
-
-// попап профиля
-editButton.addEventListener("click", function(evt) {
-  openAllPopup(popupEditProfile);
-  openPopupProfile();
-});
-
-
-// функция открытия формы редактирования профиля
-function openPopupProfile() {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileTypeOfActivity.textContent;
 };
-
-
-
-// Обработчик «отправки» формы
-function submitFormHandlerProfile (evt) {
-    evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileTypeOfActivity.textContent = jobInput.value;
-    clouseAllPopup(popupEditProfile);
-};
-
 
 // закрытия попапов
 clouseButton.addEventListener("click", function(evt) {
@@ -66,11 +43,28 @@ const clouseFormNewPlace = popupAddPlace.querySelector('.popup__clouse-button').
 });
 
 
+// открытие формы редактирования профиля при клике на кнопку
+editButton.addEventListener("click", function(evt) {
+  openAllPopup(popupEditProfile);
+  openPopupProfile();
+});
 
-// Прикрепляем обработчик к форме
+// внесение данных в форму редактирования профиля из профиля
+function openPopupProfile() {
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileTypeOfActivity.textContent;
+};
+
+// Обработчик «отправки» формы редактирования профиля
+function submitFormHandlerProfile (evt) {
+    evt.preventDefault();
+    profileName.textContent = nameInput.value;
+    profileTypeOfActivity.textContent = jobInput.value;
+    clouseAllPopup(popupEditProfile);
+};
+
+// Прикрепляем обработчик отправки к форме редактирования профиля
 formProfile.addEventListener('submit', submitFormHandlerProfile);
-
-// 
 
 // попап создания карточки-------------------------------------------------------------
 
@@ -88,33 +82,8 @@ formProfile.addEventListener('submit', submitFormHandlerProfile);
     let item = {};
     item.name = placeName.value;
     item.link = linkToThePicture.value;
-    const card = cardTemplate.querySelector('.element').cloneNode(true);
-    card.querySelector('.element__text').textContent = item.name;
-    const img = card.querySelector('.element__image');
-    img.src = item.link;
-    img.alt = item.name;
-            // переключатель для лайка
-            card.querySelector('.element__like-button').addEventListener("click", (evt) => {
-              evt.target.classList.toggle('element__like-button_active');
-          });
-      
-        // удаление карточки
-      card.querySelector('.element__delete-button').addEventListener("click", (evt) => {
-              const place = evt.target.closest('.element');
-              place.remove();
-          });
-      
-      // слушатель картинки для открытия в отдельном окне
-      img.addEventListener("click", (evt) => {
-          const clickimg = evt.target;
-          placeImg.src = clickimg.src;
-          placeImg.alt = clickimg.alt;
-          placeTitle.textContent = clickimg.alt;
-          openAllPopup(popupPlaceImage);
-          });
-      
-      // добавление карточки в начало
-      elements.prepend(card);
+    console.log(item);
+    makeCard(item);
     evt.target.reset();
     clouseAllPopup(popupAddPlace);
   };
@@ -124,11 +93,6 @@ formProfile.addEventListener('submit', submitFormHandlerProfile);
 formPlace.addEventListener('submit', submitTheFormNewPlace);
 
 
-//_____________________________________________________________________________________
-
-const submitNewCard = (name, link) => {
-
-}
 
 // создание карточек------------------------------------------------------------
 
@@ -156,7 +120,6 @@ const makeCard = (item) => {
         placeImg.alt = clickimg.alt;
         placeTitle.textContent = clickimg.alt;
         openAllPopup(popupPlaceImage);
-        console.log(clickimg);
         });
     elements.prepend(card);
 };
