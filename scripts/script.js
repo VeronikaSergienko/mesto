@@ -6,7 +6,6 @@ let popupPlaceImage = document.querySelector('.popup_type_place_image');
 let formElement = document.querySelector('.popup__form');
 let formProfile = document.querySelector('.popup__form_profile');
 let formPlace = document.querySelector('.popup__form_place');
-let clouseButton = document.querySelector('.popup__clouse-button');
 let profileName = document.querySelector('.profile__name');
 let profileTypeOfActivity = document.querySelector('.profile__type-of-activity');
 let nameInput = document.querySelector('#popupName');
@@ -17,25 +16,27 @@ const addButton = document.querySelector('.profile__add-button');
 const elements = document.querySelector('.elements');
 const placeImg = popupPlaceImage.querySelector('img');
 const placeTitle = popupPlaceImage.querySelector('.popup__place-title');
+const clouseButton = document.querySelector('.popup__clouse-button');
 
+function openAllPopup (namePopap) {
+  namePopap.classList.add('popup_opened');
+  console.log('открыли попап общей функцией');
+}
 
-
-function openPopup (elem) {
-    elem.classList.add('popup_opened');
-    console.log('открыли попап');
-};
-
-function clousePopup () {
-    popup.classList.remove('popup_opened');
-    console.log('закрыли попап');
-};
-
+function clouseAllPopup (namePopap) {
+  namePopap.classList.remove('popup_opened');
+  console.log('закрыли попап общей функцией');
+}
 
 // попап профиля
-editButton.addEventListener("click", openPopupProfile);
+editButton.addEventListener("click", function(evt) {
+  openAllPopup(popupEditProfile);
+  openPopupProfile();
+});
+
+
 // функция открытия формы редактирования профиля
 function openPopupProfile() {
-    openPopup(popupEditProfile);
     nameInput.value = profileName.textContent;
     jobInput.value = profileTypeOfActivity.textContent;
 };
@@ -47,12 +48,24 @@ function submitFormHandlerProfile (evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileTypeOfActivity.textContent = jobInput.value;
-    clousePopup(popupEditProfile);
+    clouseAllPopup(popupEditProfile);
 };
 
 
+// закрытия попапов
+clouseButton.addEventListener("click", function(evt) {
+  clouseAllPopup(popupEditProfile);
+});
 
-clouseButton.addEventListener("click", clousePopup);
+const clousePopupImage = popupPlaceImage.querySelector('.popup__clouse-button').addEventListener('click', (evt) => {
+  clouseAllPopup(popupPlaceImage);
+});
+
+const clouseFormNewPlace = popupAddPlace.querySelector('.popup__clouse-button').addEventListener('click', (evt) => {
+  clouseAllPopup(popupAddPlace);
+});
+
+
 
 // Прикрепляем обработчик к форме
 formProfile.addEventListener('submit', submitFormHandlerProfile);
@@ -64,7 +77,9 @@ formProfile.addEventListener('submit', submitFormHandlerProfile);
 // __________________________________________________________________________________
 
 
-  addButton.addEventListener('click', openPopupNewPlace);
+  addButton.addEventListener('click', (evt) => {
+      openAllPopup(popupAddPlace);
+    });
 
 
   // обработчик отправки формы нового места
@@ -95,14 +110,13 @@ formProfile.addEventListener('submit', submitFormHandlerProfile);
           placeImg.src = clickimg.src;
           placeImg.alt = clickimg.alt;
           placeTitle.textContent = clickimg.alt;
-          popupPlaceImage.classList.add('popup_opened');
-          console.log(clickimg);
+          openAllPopup(popupPlaceImage);
           });
       
       // добавление карточки в начало
       elements.prepend(card);
     evt.target.reset();
-    popupAddPlace.classList.remove('popup_opened');
+    clouseAllPopup(popupAddPlace);
   };
 
 //   прикрепляем к форме обработчик
@@ -141,44 +155,10 @@ const makeCard = (item) => {
         placeImg.src = clickimg.src;
         placeImg.alt = clickimg.alt;
         placeTitle.textContent = clickimg.alt;
-        popupPlaceImage.classList.add('popup_opened');
+        openAllPopup(popupPlaceImage);
         console.log(clickimg);
         });
     elements.prepend(card);
 };
 
 initialCards.forEach(makeCard);
-
-
-
-
-
-
-
-// функция закрытия формы нажатием на "крестик"
-// function clousePopup() {
-//     popup.classList.remove('popup_opened');
-// };
-
-  // открытие формы
-function openPopupNewPlace() {
-    popupAddPlace.classList.add('popup_opened');
-  };
-
-// ______________закрытие формы на крестик нажав
-  function clousePopupNewPlace(evt) {
-      console.log(evt.target);
-    popupAddPlace.classList.remove('popup_opened');
-  };
-
-  const clouseFormNewPlace = popupAddPlace.querySelector('.popup__clouse-button').addEventListener('click', clousePopupNewPlace);
-
-// ______________закрытие попапас картинкой нажатием на крестик
-
-const clousePopupImage = popupPlaceImage.querySelector('.popup__clouse-button').addEventListener('click', clousePopupImg);
-function clousePopupImg() {
-    popupPlaceImage.classList.remove('popup_opened');
-  };
-
-//   ------------------------------------------------------------------------
-// _________________a
