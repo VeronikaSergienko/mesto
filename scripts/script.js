@@ -2,7 +2,7 @@ let editButton = document.querySelector('.profile__edit-button');
 let popup = document.querySelector('.popup');
 let popupEditProfile = document.querySelector('.popup_type_edit-profile');
 let popupAddPlace = document.querySelector('.popup_type_new-place');
-let popupPlaceImage = document.querySelector('.popup_type_place_image');
+let popupPlaceImage = document.querySelector('.popup_type_place-image');
 let formElement = document.querySelector('.popup__form');
 let formProfile = document.querySelector('.popup__form_profile');
 let formPlace = document.querySelector('.popup__form_place');
@@ -16,17 +16,16 @@ const addButton = document.querySelector('.profile__add-button');
 const elements = document.querySelector('.elements');
 const placeImg = popupPlaceImage.querySelector('img');
 const placeTitle = popupPlaceImage.querySelector('.popup__place-title');
+const cardTemplate = document.querySelector('#card').content;
 const clouseButton = document.querySelector('.popup__clouse-button');
 
 // универсальные функции открытия и закрытия профиля
 function openAllPopup (namePopap) {
   namePopap.classList.add('popup_opened');
-  console.log('открыли попап общей функцией');
 };
 
 function clouseAllPopup (namePopap) {
   namePopap.classList.remove('popup_opened');
-  console.log('закрыли попап общей функцией');
 };
 
 // закрытия попапов
@@ -66,11 +65,7 @@ function submitFormHandlerProfile (evt) {
 // Прикрепляем обработчик отправки к форме редактирования профиля
 formProfile.addEventListener('submit', submitFormHandlerProfile);
 
-// попап создания карточки-------------------------------------------------------------
-
-// __________________________________________________________________________________
-
-
+// открытие формы создания новой карточки
   addButton.addEventListener('click', (evt) => {
       openAllPopup(popupAddPlace);
     });
@@ -89,18 +84,9 @@ formProfile.addEventListener('submit', submitFormHandlerProfile);
   };
 
 //   прикрепляем к форме обработчик
-
 formPlace.addEventListener('submit', submitTheFormNewPlace);
 
-
-
-// создание карточек------------------------------------------------------------
-
-
-const cardTemplate = document.querySelector('#card').content;
-
-// создание карточки
-// ____________________________________________________________________________________
+// создание новой карточки
 const makeCard = (item) => {
     const card = cardTemplate.querySelector('.element').cloneNode(true);
     card.querySelector('.element__text').textContent = item.name;
@@ -124,4 +110,5 @@ const makeCard = (item) => {
     elements.prepend(card);
 };
 
+// создание карточек перебором из массива
 initialCards.forEach(makeCard);

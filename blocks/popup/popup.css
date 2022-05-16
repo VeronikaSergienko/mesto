@@ -8,8 +8,11 @@
     top: 0;
     bottom: 0;
     z-index: 9;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     background-color: rgb(0 0 0 / 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .3s linear, opacity .3s linear;
 }
