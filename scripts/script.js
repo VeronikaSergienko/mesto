@@ -17,24 +17,24 @@ const placeTitle = popupPlaceImage.querySelector('.popup__place-title');
 const cardTemplate = document.querySelector('#card').content;
 
 // универсальные функции открытия и закрытия профиля
-function openPopup (namePopap) {
+function openPopup(namePopap) {
   namePopap.classList.add('popup_opened');
 };
 
-function clousePopup (namePopap) {
+function clousePopup(namePopap) {
   namePopap.classList.remove('popup_opened');
 };
 
 // закрытия попапов
-const popupProfileCloseButton = popupEditProfile.querySelector('.popup__clouse-button').addEventListener("click", (evt) => {
+popupEditProfile.querySelector('.popup__clouse-button').addEventListener("click", (evt) => {
     clousePopup(popupEditProfile);
   });
 
-const popupImageCloseButton = popupPlaceImage.querySelector('.popup__clouse-button').addEventListener('click', (evt) => {
+popupPlaceImage.querySelector('.popup__clouse-button').addEventListener('click', (evt) => {
   clousePopup(popupPlaceImage);
 });
 
-const popupNewPlaceCloseButton = popupAddPlace.querySelector('.popup__clouse-button').addEventListener('click', (evt) => {
+popupAddPlace.querySelector('.popup__clouse-button').addEventListener('click', (evt) => {
   clousePopup(popupAddPlace);
 });
 
@@ -62,7 +62,7 @@ function submitFormHandlerProfile (evt) {
 formProfile.addEventListener('submit', submitFormHandlerProfile);
 
 // открытие формы создания новой карточки
-  addButton.addEventListener('click', (evt) => {
+  addButton.addEventListener("click", (evt) => {
       openPopup(popupAddPlace);
     });
 
