@@ -1,11 +1,8 @@
 .popup__input-error {
-    border-bottom-color: rgba(255, 0, 0, 1);
-}
-
-span.popup__input-error {
+    border: 1px solid rgba(255, 0, 0, 1);
     color: rgba(255, 0, 0, 1);
     font-size: 12px;
+    line-height: 14.52px;
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0s linear 300ms, opacity 300ms;
 }
