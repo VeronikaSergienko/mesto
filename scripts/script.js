@@ -15,6 +15,10 @@ const elements = document.querySelector('.elements');
 const placeImg = popupPlaceImage.querySelector('img');
 const placeTitle = popupPlaceImage.querySelector('.popup__place-title');
 const cardTemplate = document.querySelector('#card').content;
+const allPopups = document.querySelectorAll('.popup');
+const activePopup = 'popup_opened';
+
+console.log(allPopups);
 
 // универсальные функции открытия и закрытия профиля
 function openPopup(namePopap) {
@@ -113,3 +117,13 @@ formPlace.addEventListener('submit', submitTheFormNewPlace);
 
 // создание карточек перебором из массива
 initialCards.forEach(addCard);
+
+// функция закрытия попапа кликом на overlay.
+// перебирает массив попапов, вешает слушатели. Если при клике у попапа есть класс 'открытый папап', то закрывает попап.
+allPopups.forEach((popup) => { 
+  document.addEventListener('click', (evt) => { 
+    if (evt.target.classList.contains(activePopup)) {
+        clousePopup(popup);
+    };
+  });
+});
