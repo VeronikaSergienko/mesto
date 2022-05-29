@@ -18,8 +18,6 @@ const cardTemplate = document.querySelector('#card').content;
 const allPopups = document.querySelectorAll('.popup');
 const activePopup = 'popup_opened';
 
-console.log(allPopups);
-
 // универсальные функции открытия и закрытия профиля
 function openPopup(namePopap) {
   namePopap.classList.add('popup_opened');
@@ -127,3 +125,18 @@ allPopups.forEach((popup) => {
     };
   });
 });
+
+function closeWhenClickingOnEsc(evt) {
+  if (evt.key === 'Escape') {
+    const activePopup = document.querySelector('.popup_opened');
+    clousePopup(activePopup);
+};
+};
+
+// popupEditProfile.addEventListener('keydown', function(evt) {
+//   if (evt.key === 'Escape') {
+//     clousePopup(popupEditProfile);
+//   };
+// });
+
+document.addEventListener('keydown', closeWhenClickingOnEsc);
