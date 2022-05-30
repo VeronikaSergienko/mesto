@@ -75,8 +75,7 @@ const enableValidation = ({
       evt.preventDefault();
     });
 
-    // Для каждой формы вызовем функцию setEventListeners,
-    // передав ей элемент формы
+    // Для каждой формы вызовем функцию setEventListeners, передав ей элемент формы
     setEventListeners(formElement, rest);
   });
 };
