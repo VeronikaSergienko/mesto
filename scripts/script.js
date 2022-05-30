@@ -18,13 +18,23 @@ const cardTemplate = document.querySelector('#card').content;
 const allPopups = document.querySelectorAll('.popup');
 const activePopup = 'popup_opened';
 
+// функция для закрытия попапа при  клике на esc
+function closeWhenClickingOnEsc(evt) {
+  if (evt.key === 'Escape') {
+    const activePopup = document.querySelector('.popup_opened');
+    clousePopup(activePopup);
+};
+};
+
 // универсальные функции открытия и закрытия профиля
 function openPopup(namePopap) {
   namePopap.classList.add('popup_opened');
+  document.addEventListener('keydown', closeWhenClickingOnEsc);
 };
 
 function clousePopup(namePopap) {
   namePopap.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeWhenClickingOnEsc);
 };
 
 // закрытия попапов
@@ -125,16 +135,6 @@ allPopups.forEach((popup) => {
     };
   });
 });
-
-// функция для закрытия попапа при  клике на esc
-function closeWhenClickingOnEsc(evt) {
-  if (evt.key === 'Escape') {
-    const activePopup = document.querySelector('.popup_opened');
-    clousePopup(activePopup);
-};
-};
-
-document.addEventListener('keydown', closeWhenClickingOnEsc);
 
 // функция добавления карточки при клике на enter
 function addPlaceWhenClickingOnEnter(evt) {
