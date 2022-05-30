@@ -126,6 +126,7 @@ allPopups.forEach((popup) => {
   });
 });
 
+// функция для закрытия попапа при  клике на esc
 function closeWhenClickingOnEsc(evt) {
   if (evt.key === 'Escape') {
     const activePopup = document.querySelector('.popup_opened');
@@ -133,10 +134,13 @@ function closeWhenClickingOnEsc(evt) {
 };
 };
 
-// popupEditProfile.addEventListener('keydown', function(evt) {
-//   if (evt.key === 'Escape') {
-//     clousePopup(popupEditProfile);
-//   };
-// });
-
 document.addEventListener('keydown', closeWhenClickingOnEsc);
+
+// функция добавления карточки при клике на enter
+function addPlaceWhenClickingOnEnter(evt) {
+  if (evt.key === 'Enter') {
+  submitTheFormNewPlace;
+};
+};
+
+formPlace.addEventListener('keydown', addPlaceWhenClickingOnEnter);
