@@ -118,8 +118,7 @@ function addCard(item) {
     addCard(item);
     evt.target.reset();
     const buttonElement = popupAddPlace.querySelector('.popup__save-button');
-    buttonElement.classList.add('popup__save-button_disabled');
-    buttonElement.disabled = true;
+    inactiveButton(buttonElement);
     closePopup(popupAddPlace);
   };
 

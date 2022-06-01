@@ -30,11 +30,16 @@ const isValid = (formElement, inputElement, inputErrorClass, errorClass) => {
   }
 };
 
+// функция, которая делает кнопку неактивной
+const inactiveButton = (button) => {
+  button.classList.add('popup__save-button_disabled');
+  button.disabled = true;
+};
+
 // функция делает кнопку отправки формы неактивной, если не все поля валидны
 const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(inactiveButtonClass);
-    buttonElement.disabled = true;
+    inactiveButton(buttonElement);
   } else {
     buttonElement.classList.remove(inactiveButtonClass);
     buttonElement.disabled = false;
