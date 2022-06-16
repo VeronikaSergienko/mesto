@@ -82,34 +82,34 @@ cardCreationButton.addEventListener("click", (evt) => {
     });
 
 // создание новой карточки
-// const makeCard = (item) => {
-//   const card = cardTemplate.querySelector('.element').cloneNode(true);
-//   card.querySelector('.element__text').textContent = item.name;
-//   const image = card.querySelector('.element__image');
-//   image.src = item.link;
-//   image.alt = item.name;
-//   card.querySelector('.element__like-button').addEventListener("click", (evt) => {
-//     evt.target.classList.toggle('element__like-button_active');
-//   });
-//   card.querySelector('.element__delete-button').addEventListener("click", (evt) => {
-//     const place = evt.target.closest('.element');
-//     place.remove();
-//   });
-//   image.addEventListener("click", (evt) => {
-//     const clickImage = evt.target;
-//     placeImage.src = clickImage.src;
-//     placeImage.alt = clickImage.alt;
-//     placeTitle.textContent = clickImage.alt;
-//     openPopup(popupPlaceImage);
-//   });
-//   return card;
-// };
+const makeCard = (item) => {
+  const card = cardTemplate.querySelector('.element').cloneNode(true);
+  card.querySelector('.element__text').textContent = item.name;
+  const image = card.querySelector('.element__image');
+  image.src = item.link;
+  image.alt = item.name;
+  card.querySelector('.element__like-button').addEventListener("click", (evt) => {
+    evt.target.classList.toggle('element__like-button_active');
+  });
+  card.querySelector('.element__delete-button').addEventListener("click", (evt) => {
+    const place = evt.target.closest('.element');
+    place.remove();
+  });
+  image.addEventListener("click", (evt) => {
+    const clickImage = evt.target;
+    placeImage.src = clickImage.src;
+    placeImage.alt = clickImage.alt;
+    placeTitle.textContent = clickImage.alt;
+    openPopup(popupPlaceImage);
+  });
+  return card;
+};
 
 // добавление карточки
-// function addCard(item) {
-//   const newCard = makeCard(item);
-//   listOfCards.prepend(newCard);
-// };
+function addCard(item) {
+  const newCard = makeCard(item);
+  listOfCards.prepend(newCard);
+};
 
 // обработчик отправки формы нового места
   function submitTheFormNewPlace (evt) {
