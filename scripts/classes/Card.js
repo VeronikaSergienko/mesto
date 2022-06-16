@@ -1,30 +1,6 @@
-const cardTemplate = document.querySelector('#card').content;
-const popupPlaceImage = document.querySelector('.popup_type_place-image');
-const placeImage = popupPlaceImage.querySelector('img');
-const placeTitle = popupPlaceImage.querySelector('.popup__place-title');
-const classOpenPopup = 'popup_opened';
+import {openPopup, cardTemplate, popupPlaceImage, placeImage, placeTitle} from '../index.js';
 
-// функция для закрытия попапа при  клике на esc
-function closeWhenClickingOnEsc(evt) {
-  if (evt.key === 'Escape') {
-    const classOpenPopup = document.querySelector('.popup_opened');
-    closePopup(classOpenPopup);
-};
-};
-
-// универсальные функции открытия и закрытия профиля
-function openPopup(popup) {
-  popup.classList.add(classOpenPopup);
-  document.addEventListener('keydown', closeWhenClickingOnEsc);
-};
-
-function closePopup(popup) {
-  popup.classList.remove(classOpenPopup);
-  document.removeEventListener('keydown', closeWhenClickingOnEsc);
-};
-
-
-export class Card {
+class Card {
 
     _element = '#element';
   
@@ -76,3 +52,5 @@ export class Card {
     }
     
   }
+
+  export {Card};

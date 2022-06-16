@@ -1,5 +1,6 @@
 import {Card} from './classes/Card.js';
 import {initialCards} from './arrayOfCards.js';
+import {FormValidator} from './classes/FormValidator.js';
 
 const profileEditingButton = document.querySelector('.profile__edit-button');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
@@ -20,6 +21,13 @@ const placeTitle = popupPlaceImage.querySelector('.popup__place-title');
 const cardTemplate = document.querySelector('#card').content;
 const allPopups = document.querySelectorAll('.popup');
 const classOpenPopup = 'popup_opened';
+const validationConfig = {
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+};
 
 // функция для закрытия попапа при  клике на esc
 function closeWhenClickingOnEsc(evt) {
@@ -39,6 +47,14 @@ function closePopup(popup) {
   popup.classList.remove(classOpenPopup);
   document.removeEventListener('keydown', closeWhenClickingOnEsc);
 };
+
+// создаём массив форм, перебором создаём экземпляры класса, валидируем
+const formList = {};
+
+Array.from(document.forms).forEach((formListElement) => {
+  formList[formListElement.name] = new FormValidator(validationConfig, formListElement);
+  formList[formListElement.name].enableValidation();
+});
 
 // закрытия попапов
 popupEditProfile.querySelector('.popup__clouse-button').addEventListener("click", (evt) => {
@@ -80,6 +96,12 @@ formProfile.addEventListener('submit', submitFormHandlerProfile);
 cardCreationButton.addEventListener("click", (evt) => {
       openPopup(popupAddPlace);
     });
+
+// функция, которая делает кнопку неактивной
+const inactiveButton = (button) => {
+  button.classList.add('popup__save-button_disabled');
+  button.disabled = true;
+};
 
 // создание новой карточки
 const makeCard = (item) => {
@@ -128,9 +150,6 @@ function addCard(item) {
 //   прикрепляем к форме обработчик
 formPlace.addEventListener('submit', submitTheFormNewPlace);
 
-// создание карточек перебором из массива
-// initialCards.forEach(addCard);
-
 // функция закрытия попапа кликом на overlay.
 // перебирает массив попапов, вешает слушатели. Если при клике у попапа есть класс 'открытый папап', то закрывает попап.
 allPopups.forEach((popup) => { 
@@ -150,8 +169,11 @@ function addPlaceWhenClickingOnEnter(evt) {
 
 formPlace.addEventListener('keydown', addPlaceWhenClickingOnEnter);
 
+// создание экземпляров карточек, перебором массива
 initialCards.forEach((item) => {
   const Card1 = new Card(item);
   const card = Card1.generate();
   listOfCards.prepend(card);
 });
+
+export {openPopup, cardTemplate, popupPlaceImage, placeImage, placeTitle};
