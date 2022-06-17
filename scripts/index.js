@@ -94,42 +94,37 @@ formProfile.addEventListener('submit', submitFormHandlerProfile);
 
 // открытие формы создания новой карточки
 cardCreationButton.addEventListener("click", (evt) => {
-      openPopup(popupAddPlace);
-    });
+  openPopup(popupAddPlace);
+});
 
 // функция, которая делает кнопку неактивной
-const inactiveButton = (button) => {
+const inactiveButtonO = (button) => {
   button.classList.add('popup__save-button_disabled');
   button.disabled = true;
 };
 
-// создание новой карточки
-const makeCard = (item) => {
-  const card = cardTemplate.querySelector('.element').cloneNode(true);
-  card.querySelector('.element__text').textContent = item.name;
-  const image = card.querySelector('.element__image');
-  image.src = item.link;
-  image.alt = item.name;
-  card.querySelector('.element__like-button').addEventListener("click", (evt) => {
-    evt.target.classList.toggle('element__like-button_active');
-  });
-  card.querySelector('.element__delete-button').addEventListener("click", (evt) => {
-    const place = evt.target.closest('.element');
-    place.remove();
-  });
-  image.addEventListener("click", (evt) => {
-    const clickImage = evt.target;
-    placeImage.src = clickImage.src;
-    placeImage.alt = clickImage.alt;
-    placeTitle.textContent = clickImage.alt;
-    openPopup(popupPlaceImage);
-  });
-  return card;
+function handleCardClick(name, link) {
+  placeImage.src = link;
+  placeImage.alt = name;
+  placeTitle.textContent = name;
+  openPopup(popupPlaceImage);
+}
+
+// функция создания экземпляра класса карточки 
+function createCard(item) {
+  const card = new Card(item, '#element', handleCardClick);
+  const cardElement = card.generate();
+  return cardElement;  
 };
 
-// добавление карточки
+// добавление экземпляров карточек, перебором массива
+initialCards.forEach((item) => {
+  addCard(item);
+});
+
+// добавление карточки в начало
 function addCard(item) {
-  const newCard = makeCard(item);
+  const newCard = createCard(item);
   listOfCards.prepend(newCard);
 };
 
@@ -143,7 +138,7 @@ function addCard(item) {
     addCard(item);
     evt.target.reset();
     const buttonElement = popupAddPlace.querySelector('.popup__save-button');
-    inactiveButton(buttonElement);
+    inactiveButtonO(buttonElement);
     closePopup(popupAddPlace);
   };
 
@@ -159,21 +154,3 @@ allPopups.forEach((popup) => {
     };
   });
 });
-
-// функция добавления карточки при клике на enter
-function addPlaceWhenClickingOnEnter(evt) {
-  if (evt.key === 'Enter') {
-  submitTheFormNewPlace;
-};
-};
-
-formPlace.addEventListener('keydown', addPlaceWhenClickingOnEnter);
-
-// создание экземпляров карточек, перебором массива
-initialCards.forEach((item) => {
-  const Card1 = new Card(item);
-  const card = Card1.generate();
-  listOfCards.prepend(card);
-});
-
-export {openPopup, cardTemplate, popupPlaceImage, placeImage, placeTitle};

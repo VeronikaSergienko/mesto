@@ -56,17 +56,26 @@ class FormValidator {
     }
   }; 
 
+  _setEventListeners(inputElement, buttonElement, inputList) {
+      inputElement.addEventListener('input', () => {
+      // Внутри колбэка вызовем isValid, передав ей форму и проверяемый элемент
+      this._isValid(inputElement);
+      this._toggleButtonState(inputList, buttonElement);
+      });  
+  }
+
 // Находим все поля внутри формы, сделаем из них массив методом Array.from, каждому полю добавим обработчик события input
 enableValidation() {
     const inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
     const buttonElement = this._form.querySelector(this._submitButtonSelector);
     this._toggleButtonState(inputList, buttonElement, this._inactiveButtonClass);
     inputList.forEach((inputElement) => {
-        inputElement.addEventListener('input', () => {
-        // Внутри колбэка вызовем isValid, передав ей форму и проверяемый элемент
-        this._isValid(inputElement);
-        this._toggleButtonState(inputList, buttonElement);
-        });        
+      this._setEventListeners(inputElement, buttonElement, inputList);
+        // inputElement.addEventListener('input', () => {
+        // // Внутри колбэка вызовем isValid, передав ей форму и проверяемый элемент
+        // this._isValid(inputElement);
+        // this._toggleButtonState(inputList, buttonElement);
+        // });        
       });
       this._toggleButtonState(inputList, buttonElement);
   }; 
