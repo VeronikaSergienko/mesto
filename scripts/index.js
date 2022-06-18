@@ -76,6 +76,7 @@ popupAddPlace.querySelector('.popup__clouse-button').addEventListener('click', (
 
 // функция открытия попапа редактирования профиля
 function openPopupProfile() {
+  formList[popupEditProfile.name].resetValidation();  
   openPopup(popupEditProfile);
   nameInput.value = profileName.textContent;
   jobInput.value = profileTypeOfActivity.textContent;
