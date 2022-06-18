@@ -37,17 +37,6 @@ function closeWhenClickingOnEsc(evt) {
 };
 };
 
-// универсальные функции открытия и закрытия профиля
-function openPopup(popup) {
-  popup.classList.add(classOpenPopup);
-  document.addEventListener('keydown', closeWhenClickingOnEsc);
-};
-
-function closePopup(popup) {
-  popup.classList.remove(classOpenPopup);
-  document.removeEventListener('keydown', closeWhenClickingOnEsc);
-};
-
 // создаём массив форм, перебором создаём экземпляры класса, валидируем
 const formList = {};
 
@@ -55,6 +44,22 @@ Array.from(document.forms).forEach((formListElement) => {
   formList[formListElement.name] = new FormValidator(validationConfig, formListElement);
   formList[formListElement.name].enableValidation();
 });
+
+// универсальные функции открытия и закрытия профиля
+function openPopup(popup) {
+  popup.classList.add(classOpenPopup);
+  document.addEventListener('keydown', closeWhenClickingOnEsc);
+  // const thisForm = popup.querySelector('.popup__form');
+  // const validat = new FormValidator(validationConfig, thisForm);
+  // validat.resetValidation();
+};
+
+function closePopup(popup) {
+  popup.classList.remove(classOpenPopup);
+  document.removeEventListener('keydown', closeWhenClickingOnEsc);
+};
+
+
 
 // закрытия попапов
 popupEditProfile.querySelector('.popup__clouse-button').addEventListener("click", (evt) => {
@@ -138,7 +143,7 @@ function addCard(item) {
     addCard(item);
     evt.target.reset();
     const buttonElement = popupAddPlace.querySelector('.popup__save-button');
-    inactiveButtonO(buttonElement);
+    // inactiveButtonO(buttonElement);    
     closePopup(popupAddPlace);
   };
 

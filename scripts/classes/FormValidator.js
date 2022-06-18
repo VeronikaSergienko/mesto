@@ -6,6 +6,7 @@ class FormValidator {
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
     this._form = form;
+    // this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
   }
 
   // функция показывающая ошибку
@@ -62,7 +63,8 @@ class FormValidator {
       this._isValid(inputElement);
       this._toggleButtonState(inputList, buttonElement);
       });  
-  }
+  };
+
 
 // Находим все поля внутри формы, сделаем из них массив методом Array.from, каждому полю добавим обработчик события input
 enableValidation() {
@@ -70,15 +72,21 @@ enableValidation() {
     const buttonElement = this._form.querySelector(this._submitButtonSelector);
     this._toggleButtonState(inputList, buttonElement, this._inactiveButtonClass);
     inputList.forEach((inputElement) => {
-      this._setEventListeners(inputElement, buttonElement, inputList);
-        // inputElement.addEventListener('input', () => {
-        // // Внутри колбэка вызовем isValid, передав ей форму и проверяемый элемент
-        // this._isValid(inputElement);
-        // this._toggleButtonState(inputList, buttonElement);
-        // });        
+      this._setEventListeners(inputElement, buttonElement, inputList);       
       });
       this._toggleButtonState(inputList, buttonElement);
   }; 
+
+  
+resetValidation() {
+  // this._toggleButtonState(this._inputList, this._submitButtonSelector);
+  const inputList = Array.from(this._form.querySelectorAll(`.${this._inputSelector}`));
+  const saveButton = this._form.querySelector(`.${this._submitButtonSelector}`);
+  inputList.forEach((inputElement) => {
+    this._hideInputError(inputElement);
+  });
+  this._toggleButtonState(inputList, saveButton);
+};
 
 };
 
