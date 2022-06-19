@@ -6,6 +6,8 @@ class FormValidator {
     this._inputErrorClass = config.inputErrorClass;
     this._errorClass = config.errorClass;
     this._form = form;
+    this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
+    this._saveButton = this._form.querySelector(this._submitButtonSelector);
   }
 
   // функция показывающая ошибку
@@ -66,23 +68,18 @@ class FormValidator {
 
 // Находим все поля внутри формы, сделаем из них массив методом Array.from, каждому полю добавим обработчик события input
 enableValidation() {
-    const inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
-    const buttonElement = this._form.querySelector(this._submitButtonSelector);
-    this._toggleButtonState(inputList, buttonElement, this._inactiveButtonClass);
-    inputList.forEach((inputElement) => {
-      this._setEventListeners(inputElement, buttonElement, inputList);       
+    this._toggleButtonState(this._inputList, this._saveButton);
+    this._inputList.forEach((inputElement) => {
+      this._setEventListeners(inputElement, this._saveButton, this._inputList);       
       });
-      this._toggleButtonState(inputList, buttonElement);
+      this._toggleButtonState(this._inputList, this._saveButton);
   }; 
   
 resetValidation() {
-  // this._toggleButtonState(this._inputList, this._submitButtonSelector);
-  const inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
-  const saveButton = this._form.querySelector(this._submitButtonSelector);
-  inputList.forEach((inputElement) => {
+  this._inputList.forEach((inputElement) => {
     this._hideInputError(inputElement);
   });
-  this._toggleButtonState(inputList, saveButton);
+  this._toggleButtonState(this._inputList, this._saveButton);
 };
 };
 

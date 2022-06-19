@@ -41,7 +41,6 @@ const formList = {};
 
 Array.from(document.forms).forEach((formListElement) => {
   formList[formListElement.name] = new FormValidator(validationConfig, formListElement);
-  console.log(formListElement);
   formList[formListElement.name].enableValidation();
 });
 
@@ -78,8 +77,7 @@ function openPopupProfile() {
 
 // открытие формы редактирования профиля при клике на кнопку
 profileEditingButton.addEventListener("click", function(evt) {
-  const formToOpen = new FormValidator(validationConfig, formProfile);
-  formToOpen.resetValidation();
+  formList[formProfile.name].resetValidation();
   openPopupProfile();
 });
 
@@ -97,8 +95,7 @@ formProfile.addEventListener('submit', submitFormHandlerProfile);
 // открытие формы создания новой карточки
 cardCreationButton.addEventListener("click", (evt) => {
   formPlace.reset();
-  const formToOpen = new FormValidator(validationConfig, formPlace);
-  formToOpen.resetValidation();
+  formList[formPlace.name].resetValidation();
   openPopup(popupAddPlace);
 });
 
