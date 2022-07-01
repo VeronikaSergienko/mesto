@@ -37,6 +37,9 @@ Array.from(document.forms).forEach((formListElement) => {
 
 const user = new UserInfo({nameSelector:'.profile__name', jobSelector:'.profile__type-of-activity'});
 
+// ____________создание экземпляра попапа с изображением
+const popupImageCard = new PopupWithImage('.popup_type_place-image');
+
 function handleCardClick(name, link) {
   placeImage.src = link;
   placeImage.alt = name;
@@ -74,16 +77,15 @@ function submitTheFormNewPlace (evt) {
   const item = {};
   item.name = placeName.value;
   item.link = linkToThePicture.value;
-  console.log(item);
   handleCardSubmit(item);
   popupNewPlace.close();
 };
 
-// ____________создание экземпляра попапа редактирования профиля
-const popupProfile = new PopupWithForm('.popup_type_edit-profile', submitFormHandlerProfile);
-
 // ____________создание экземпляра попапа добавления карточки
 const popupNewPlace = new PopupWithForm('.popup_type_new-place', submitTheFormNewPlace);
+
+// ____________создание экземпляра попапа редактирования профиля
+const popupProfile = new PopupWithForm('.popup_type_edit-profile', submitFormHandlerProfile);
 
 // функция открытия попапа редактирования профиля
 function openPopupProfile() {
@@ -99,9 +101,6 @@ profileEditingButton.addEventListener("click", function(evt) {
   formList[formProfile.name].resetValidation();
   openPopupProfile();
 });
-
-// ____________создание экземпляра попапа с изображением
-const popupImageCard = new PopupWithImage('.popup_type_place-image');
 
 // открытие формы создания новой карточки
 cardCreationButton.addEventListener("click", (evt) => {
