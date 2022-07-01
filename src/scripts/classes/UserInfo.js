@@ -14,8 +14,6 @@ export class UserInfo {
     };
 
     getUserInfo = () => {
-        // data.name = this._profileName.textContent;
-        // data.job = this._profileTypeOfActivity.textContent;
         return {name: this._profileName.textContent, job: this._profileTypeOfActivity.textContent};
     };
 }

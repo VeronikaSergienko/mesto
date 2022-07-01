@@ -7,8 +7,7 @@ export class Section {
     }
 
     addItem(item) {
-        this._conteiner.prepend(this._renderer(item));
-        console.log('я создал экземпляр карты');     
+        this._conteiner.prepend(this._renderer(item));   
     };
 
     rendererAll() {
