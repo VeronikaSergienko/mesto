@@ -1,11 +1,11 @@
-import '../pages/index.css';
-import {Card} from './classes/Card.js';
-import {initialCards} from './arrayOfCards.js';
-import {FormValidator} from './classes/FormValidator.js';
-import { Section } from './classes/Section.js';
-import { UserInfo } from './classes/UserInfo.js';
-import { PopupWithForm } from './classes/PopupWithForm.js';
-import { PopupWithImage } from './classes/PopupWithImage.js';
+import './index.css';
+import {Card} from '../components/Card.js';
+import {initialCards} from '../components/arrayOfCards.js';
+import {FormValidator} from '../components/FormValidator.js';
+import { Section } from '../components/Section.js';
+import { UserInfo } from '../components/UserInfo.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
 
 const profileEditingButton = document.querySelector('.profile__edit-button');
 const popupPlaceImage = document.querySelector('.popup_type_place-image');
@@ -36,57 +36,6 @@ Array.from(document.forms).forEach((formListElement) => {
 });
 
 const user = new UserInfo({nameSelector:'.profile__name', jobSelector:'.profile__type-of-activity'});
-console.log(user);
-
-
-// создание объекта класса Section___________________________________________
-const cardsConteiner = new Section({
-  items: initialCards.reverse(),
-  renderer: createCard,
-}, cardsConteinerSelector);
-
-cardsConteiner.rendererAll();
-
-const handleCardSubmit = (item) => {
-  cardsConteiner.addItem(item);
-};
-
-// ____________создание экземпляра попапа редактирования профиля
-const popupProfile = new PopupWithForm('.popup_type_edit-profile', submitFormHandlerProfile);
-
-// ____________создание экземпляра попапа добавления карточки
-const popupNewPlace = new PopupWithForm('.popup_type_new-place', submitTheFormNewPlace);
-
-// открытие формы редактирования профиля при клике на кнопку
-profileEditingButton.addEventListener("click", function(evt) {
-  formList[formProfile.name].resetValidation();
-  openPopupProfile();
-});
-
-// функция открытия попапа редактирования профиля
-function openPopupProfile() {
-  popupProfile.open();
-  const data = user.getUserInfo();
-  nameInput.value = data.name;
-  jobInput.value = data.job;
-  popupProfile.setEventListeners();
-};
-
-// Обработчик «отправки» формы редактирования профиля
-function submitFormHandlerProfile (data) {
-    user.setUserInfo(data);
-};
-
-// ____________создание экземпляра попапа с изображением
-const popupImageCard = new PopupWithImage('.popup_type_place-image');
-
-// открытие формы создания новой карточки
-cardCreationButton.addEventListener("click", (evt) => {
-  formPlace.reset();
-  formList[formPlace.name].resetValidation();
-  popupNewPlace.open();
-  popupNewPlace.setEventListeners();
-});
 
 function handleCardClick(name, link) {
   placeImage.src = link;
@@ -103,13 +52,61 @@ function createCard(item) {
   return cardElement;  
 };
 
+// создание объекта класса Section
+const cardsConteiner = new Section({
+  items: initialCards.reverse(),
+  renderer: createCard,
+}, cardsConteinerSelector);
+
+cardsConteiner.rendererAll();
+
+const handleCardSubmit = (item) => {
+  cardsConteiner.addItem(item);
+};
+
+// Обработчик «отправки» формы редактирования профиля
+function submitFormHandlerProfile (data) {
+  user.setUserInfo(data);
+};
+
 // обработчик отправки формы нового места
-  function submitTheFormNewPlace (evt) {
-    // evt.preventDefault();
-    const item = {};
-    item.name = placeName.value;
-    item.link = linkToThePicture.value;
-    console.log(item);
-    handleCardSubmit(item);
-    popupNewPlace.close();
-  };
+function submitTheFormNewPlace (evt) {
+  const item = {};
+  item.name = placeName.value;
+  item.link = linkToThePicture.value;
+  console.log(item);
+  handleCardSubmit(item);
+  popupNewPlace.close();
+};
+
+// ____________создание экземпляра попапа редактирования профиля
+const popupProfile = new PopupWithForm('.popup_type_edit-profile', submitFormHandlerProfile);
+
+// ____________создание экземпляра попапа добавления карточки
+const popupNewPlace = new PopupWithForm('.popup_type_new-place', submitTheFormNewPlace);
+
+// функция открытия попапа редактирования профиля
+function openPopupProfile() {
+  popupProfile.open();
+  const data = user.getUserInfo();
+  nameInput.value = data.name;
+  jobInput.value = data.job;
+  popupProfile.setEventListeners();
+};
+
+// открытие формы редактирования профиля при клике на кнопку
+profileEditingButton.addEventListener("click", function(evt) {
+  formList[formProfile.name].resetValidation();
+  openPopupProfile();
+});
+
+// ____________создание экземпляра попапа с изображением
+const popupImageCard = new PopupWithImage('.popup_type_place-image');
+
+// открытие формы создания новой карточки
+cardCreationButton.addEventListener("click", (evt) => {
+  formPlace.reset();
+  formList[formPlace.name].resetValidation();
+  popupNewPlace.open();
+  popupNewPlace.setEventListeners();
+});

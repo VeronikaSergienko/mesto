@@ -2,8 +2,6 @@ export default class Popup {
     constructor(selectorPopup) {
         this._selectorPopup = selectorPopup;
         this._popup = document.querySelector(this._selectorPopup);
-        // this._classOpenPopup = this._popup.querySelector('popup_opened');
-        // this._closeButtonSelector = this._popup.querySelector('.popup__clouse-button');
     }
 
     // публичный метод, отвечает за открытие попапа
@@ -21,7 +19,6 @@ export default class Popup {
     // закрытие попапа при клике на esc
     _handleEscClose = (evt) => {
         if (evt.key === 'Escape') {
-            console.log('меня закрыли эскейпом');
             this.close();
         };
     };
@@ -40,11 +37,3 @@ export default class Popup {
         });
     };
 };
-
-// Создайте класс Popup
-// Создайте класс Popup, который отвечает за открытие и закрытие попапа. Этот класс:
-// Принимает в конструктор единственный параметр — селектор попапа.
-// Содержит публичные методы open и close, которые отвечают за открытие и закрытие попапа.
-// Содержит приватный метод _handleEscClose, который содержит логику закрытия попапа клавишей Esc.
-// Содержит публичный метод setEventListeners, который добавляет слушатель клика иконке закрытия попапа. 
-// Модальное окно также закрывается при клике на затемнённую область вокруг формы.
