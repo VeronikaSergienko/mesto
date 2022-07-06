@@ -44,7 +44,7 @@ class FormValidator {
 
   // функция, которая делает кнопку неактивной
   _inactiveButton(button){
-  button.classList.add('popup__save-button_disabled');
+  button.classList.add(this._inactiveButtonClass);
   button.disabled = true;
   };
 

@@ -1,31 +1,19 @@
 import './index.css';
 import {Card} from '../components/Card.js';
-import {initialCards} from '../components/arrayOfCards.js';
+import {initialCards} from '../components/utils/arrayOfCards.js';
 import {FormValidator} from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
-
-const profileEditingButton = document.querySelector('.profile__edit-button');
-const popupPlaceImage = document.querySelector('.popup_type_place-image');
-const formProfile = document.querySelector('.popup__form_profile');
-const formPlace = document.querySelector('.popup__form_place');
-const nameInput = document.querySelector('#popupName');
-const jobInput = document.querySelector('#popupTypeOfActivity');
-const placeName = document.querySelector('#place-name');
-const linkToThePicture = document.querySelector('#link-to-the-picture');
-const cardCreationButton = document.querySelector('.profile__add-button');
-const placeImage = popupPlaceImage.querySelector('img');
-const placeTitle = popupPlaceImage.querySelector('.popup__place-title');
-const validationConfig = {
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
-};
-const cardsConteinerSelector = '.elements';
+import {profileEditingButton, 
+  formProfile, 
+  formPlace, 
+  nameInput, 
+  jobInput,
+  cardCreationButton,
+  validationConfig, 
+  cardsConteinerSelector} from '../components/utils/constants';
 
 // создаём массив форм, перебором создаём экземпляры класса, валидируем
 const formList = {};
@@ -39,18 +27,15 @@ const user = new UserInfo({nameSelector:'.profile__name', jobSelector:'.profile_
 
 // ____________создание экземпляра попапа с изображением
 const popupImageCard = new PopupWithImage('.popup_type_place-image');
+popupImageCard.setEventListeners();
 
 function handleCardClick(name, link) {
-  placeImage.src = link;
-  placeImage.alt = name;
-  placeTitle.textContent = name;
-  popupImageCard.open({name, link});
-  popupImageCard.setEventListeners();
+  popupImageCard.open({name, link});  
 }
 
 // функция создания экземпляра класса карточки 
 function createCard(item) {
-  const card = new Card(item, '#element', handleCardClick);
+  const card = new Card(item, '#card', handleCardClick);
   const cardElement = card.generate();
   return cardElement;  
 };
@@ -74,18 +59,19 @@ function submitFormHandlerProfile (data) {
 
 // обработчик отправки формы нового места
 function submitTheFormNewPlace (evt) {
-  const item = {};
-  item.name = placeName.value;
-  item.link = linkToThePicture.value;
+  const item = popupNewPlace._getInputValues();
+  item.name = item.title;
   handleCardSubmit(item);
   popupNewPlace.close();
 };
 
 // ____________создание экземпляра попапа добавления карточки
 const popupNewPlace = new PopupWithForm('.popup_type_new-place', submitTheFormNewPlace);
+popupNewPlace.setEventListeners();
 
 // ____________создание экземпляра попапа редактирования профиля
 const popupProfile = new PopupWithForm('.popup_type_edit-profile', submitFormHandlerProfile);
+popupProfile.setEventListeners();
 
 // функция открытия попапа редактирования профиля
 function openPopupProfile() {
@@ -93,7 +79,6 @@ function openPopupProfile() {
   const data = user.getUserInfo();
   nameInput.value = data.name;
   jobInput.value = data.job;
-  popupProfile.setEventListeners();
 };
 
 // открытие формы редактирования профиля при клике на кнопку
@@ -104,8 +89,6 @@ profileEditingButton.addEventListener("click", function(evt) {
 
 // открытие формы создания новой карточки
 cardCreationButton.addEventListener("click", (evt) => {
-  formPlace.reset();
   formList[formPlace.name].resetValidation();
   popupNewPlace.open();
-  popupNewPlace.setEventListeners();
 });

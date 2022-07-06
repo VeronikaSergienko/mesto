@@ -1,13 +1,13 @@
 class Card {
-    constructor(item, cardSelector, handleCardClick) {
+    constructor(item, cardTemplateSelector, handleCardClick) {
       this._name = item.name,
       this._link = item.link,
-      this._cardSelector = cardSelector,
+      this._cardTemplateSelector = cardTemplateSelector;
       this._handleCardClick = handleCardClick;
     }
   
     _getElement() {
-      const card = document.querySelector('#card').content.querySelector(this._cardSelector).cloneNode(true);
+      const card = document.querySelector(this._cardTemplateSelector).content.querySelector('#element').cloneNode(true);
       return card;
     }
   
@@ -15,7 +15,7 @@ class Card {
       this._likeButton.classList.toggle('element__like-button_active');
     }
   
-    _deleteButton() {
+    _deleteCard() {
       this._element.remove();
     }
   
@@ -24,7 +24,7 @@ class Card {
         this._toggleLike();
       }); 
       this._buttonDelete.addEventListener("click", () => {
-        this._deleteButton();
+        this._deleteCard();
       });
       this._image.addEventListener("click", () => {
         this._handleCardClick(this._name, this._link);

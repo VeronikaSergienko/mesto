@@ -14,7 +14,7 @@ export class PopupWithForm extends Popup {
     _getInputValues() {
         const values = {};
         this._inputList.forEach((inputElement) => {
-            values[inputElement.name.slice(6)] = inputElement.value;
+            values[inputElement.id.slice(6)] = inputElement.value;
         })
 
         return values;
@@ -22,7 +22,7 @@ export class PopupWithForm extends Popup {
 
     _setInputValues(values) {
         this._inputList.forEach((inputElement) => {
-            inputElement.value = values[inputElement.name.slice(6)];
+            inputElement.value = values[inputElement.id.slice(6)];
         })
     }
 
