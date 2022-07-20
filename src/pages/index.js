@@ -46,64 +46,6 @@ function addOrRemoveLike(cardId, isLiked, setLikes) {
   })
 };
 
-// ____________создание экземпляра попапа добавления карточки
-const popupNewPlace = new PopupWithForm('.popup_type_new-place', submitTheFormNewPlace);
-popupNewPlace.setEventListeners();
-
-// ____________создание экземпляра попапа редактирования профиля
-const popupProfile = new PopupWithForm('.popup_type_edit-profile', submitFormHandlerProfile);
-popupProfile.setEventListeners();
-
-// __________создание экземпляра попапа с согласием удаления карточки
-const popupWithConfirmation = new PopupWithConfirmation('.popup_type_confirmation', handleCardDelete);
-popupWithConfirmation.setEventListeners();
-
-function openPopupWithConfirmation(cardId, deleteCardElement) {
-  popupWithConfirmation.open(cardId, deleteCardElement);
-}
-
-// функция колбэк удаления карточки
-function handleCardDelete(cardId, deleteCardElement) {
-  api.deleteCard(cardId)
-  .then((res) => {
-    console.log(res);
-    deleteCardElement();
-    popupWithConfirmation.close();
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-}
-
-// функция создания экземпляра класса карточки 
-function createCard(item) {
-  const card = new Card(item, user.getUserId(), '#card', handleCardClick, openPopupWithConfirmation, addOrRemoveLike);
-  const cardElement = card.generate();
-  return cardElement;  
-};
-
-// создание объекта класса Section
-const cardsConteiner = new Section({
-  renderer: createCard,
-}, cardsConteinerSelector);
-
-
-// Обработчик «отправки» формы редактирования профиля
-function submitFormHandlerProfile (data) {
-  popupProfile.toggleButtonText(true);
-  api.patchUserInfo(data)
-  .then((res) => {
-    user.setUserInfo(res);
-    popupProfile.close();
-  })
-  .catch((err) => {
-    console.log(err);
-  })  
-  .finally(() => {
-    popupProfile.toggleButtonText(false);
-  })
-};
-
 // обработчик отправки формы нового места
 function submitTheFormNewPlace (evt) {
   const item = popupNewPlace._getInputValues();
@@ -121,7 +63,62 @@ function submitTheFormNewPlace (evt) {
   })
 };
 
+// Обработчик «отправки» формы редактирования профиля
+function submitFormHandlerProfile (data) {
+  popupProfile.toggleButtonText(true);
+  api.patchUserInfo(data)
+  .then((res) => {
+    user.setUserInfo(res);
+    popupProfile.close();
+  })
+  .catch((err) => {
+    console.log(err);
+  })  
+  .finally(() => {
+    popupProfile.toggleButtonText(false);
+  })
+};
 
+// функция колбэк удаления карточки
+function handleCardDelete(cardId, deleteCardElement) {
+  api.deleteCard(cardId)
+  .then((res) => {
+    console.log(res);
+    deleteCardElement();
+    popupWithConfirmation.close();
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
+// ____________создание экземпляра попапа добавления карточки
+const popupNewPlace = new PopupWithForm('.popup_type_new-place', submitTheFormNewPlace);
+popupNewPlace.setEventListeners();
+
+// ____________создание экземпляра попапа редактирования профиля
+const popupProfile = new PopupWithForm('.popup_type_edit-profile', submitFormHandlerProfile);
+popupProfile.setEventListeners();
+
+// __________создание экземпляра попапа с согласием удаления карточки
+const popupWithConfirmation = new PopupWithConfirmation('.popup_type_confirmation', handleCardDelete);
+popupWithConfirmation.setEventListeners();
+
+function openPopupWithConfirmation(cardId, deleteCardElement) {
+  popupWithConfirmation.open(cardId, deleteCardElement);
+}
+
+// функция создания экземпляра класса карточки 
+function createCard(item) {
+  const card = new Card(item, user.getUserId(), '#card', handleCardClick, openPopupWithConfirmation, addOrRemoveLike);
+  const cardElement = card.generate();
+  return cardElement;  
+};
+
+// создание объекта класса Section
+const cardsConteiner = new Section({
+  renderer: createCard,
+}, cardsConteinerSelector);
 
 // функция открытия попапа редактирования профиля
 function openPopupProfile() {
@@ -143,15 +140,6 @@ cardCreationButton.addEventListener("click", (evt) => {
   popupNewPlace.open();
 });
 
-// создание экземпляра класса для попапа смены аватара
-// навешивание слушателя для открытия попапа
-const popupAvatar = new PopupWithForm('.popup_type_edit-avatar', submitFormHandlerAvatar);
-popupAvatar.setEventListeners();
-profileAvatar.addEventListener("click", (evt) => {
-  formList[formAvatar.name].resetValidation();
-  popupAvatar.open();
-})
-
 // функция-колбэк для отправки аватара профиля
 function submitFormHandlerAvatar (data) {
   popupAvatar.toggleButtonText(true);
@@ -166,6 +154,15 @@ function submitFormHandlerAvatar (data) {
     popupAvatar.toggleButtonText(false);
   })
 }
+
+// создание экземпляра класса для попапа смены аватара
+// навешивание слушателя для открытия попапа
+const popupAvatar = new PopupWithForm('.popup_type_edit-avatar', submitFormHandlerAvatar);
+popupAvatar.setEventListeners();
+profileAvatar.addEventListener("click", (evt) => {
+  formList[formAvatar.name].resetValidation();
+  popupAvatar.open();
+})
 
 Promise.all([api.getUserInfoApi(), api.getInitialCardsApi()])
 .then(([profile, cards]) => {
