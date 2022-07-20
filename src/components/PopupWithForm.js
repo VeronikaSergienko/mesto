@@ -8,6 +8,9 @@ export class PopupWithForm extends Popup {
         this._form = this._popup.querySelector('.popup__form');
         this._inputList = Array.from(this._form.querySelectorAll('.popup__input'));
         this._submitButton = this._form.querySelector('.popup__save-button');
+        const textButton = this._submitButton.textContent;
+        this.textButton = textButton;
+        this.toggleButtonText = this.toggleButtonText.bind(this);
     }
 
     // приватный метод _getInputValues, который собирает данные всех полей формы.
@@ -26,10 +29,18 @@ export class PopupWithForm extends Popup {
         })
     }
 
+    toggleButtonText(isSet) {
+        if (isSet) {
+            this._submitButton.textContent = 'Сохранение...';
+        } else {
+            this._submitButton.textContent = this.textButton;
+        }
+    }
+
     _handleSubmit = (evt) => {
         evt.preventDefault();
         this._submitCallBack(this._getInputValues());
-        this.close();
+        
     }
 
     // Перезаписывает родительский метод setEventListeners, добавляет обработчик сабмита формы.
