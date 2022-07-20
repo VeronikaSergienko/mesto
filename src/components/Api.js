@@ -1,7 +1,6 @@
 export class Api {
     constructor({ baseUrl }) {
       this._url = baseUrl;
-      // console.log(this._url);
     }
 
     // получение данных о пользователе
@@ -18,7 +17,6 @@ export class Api {
       }); 
     }
 
-  
     // публичный метод для получения массива карточек с сервера
     getInitialCardsApi() {
       return fetch(`${this._url}cards`, {
@@ -135,30 +133,5 @@ export class Api {
             // если ошибка, отклоняем промис
              return Promise.reject(`Ошибка: ${res.status}`);
           })
-          
     }
-  
   }
-
-
-
-
-
-  
-//   const api = new Api({
-//     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-45',
-//     headers: {
-//       authorization: 'a5c762bc-210a-4e68-9fc7-978e4674d050',
-//       'Content-Type': 'application/json'
-//     }
-//   }); 
-
-// fetch('https://mesto.nomoreparties.co/v1/cohort-45/cards', {
-//   headers: {
-//     authorization: 'a5c762bc-210a-4e68-9fc7-978e4674d050'
-//   }
-// })
-//   .then(res => res.json())
-//   .then((result) => {
-//     console.log(result);
-//   }); 
