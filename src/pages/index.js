@@ -26,7 +26,13 @@ Array.from(document.forms).forEach((formListElement) => {
   formList[formListElement.name].enableValidation();
 });
 
-const api = new Api({ baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-45/' });
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-45/', 
+  headers: {
+    authorization: 'a5c762bc-210a-4e68-9fc7-978e4674d050',
+    'Content-Type': 'application/json'
+  } 
+});
 const user = new UserInfo({ nameSelector:'.profile__name', jobSelector:'.profile__type-of-activity', avatarSelector: '.profile__avatar' });
 
 // ____________создание экземпляра попапа с изображением

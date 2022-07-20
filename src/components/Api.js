@@ -1,137 +1,87 @@
 export class Api {
-    constructor({ baseUrl }) {
+    constructor({ baseUrl, headers }) {
       this._url = baseUrl;
+      this._headers = headers;
     }
+
+    _checkResponse(res) {
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(`Ошибка ${res.status}`);
+  }
 
     // получение данных о пользователе
     getUserInfoApi() {
       return fetch(`${this._url}users/me`, {
       method: 'GET',
-      headers: {
-        authorization: 'a5c762bc-210a-4e68-9fc7-978e4674d050'
-      }
+      headers: this._headers,
       })
-      .then(res => res.json())
-      .then((result) => {
-        return result;
-      }); 
+      .then(this._checkResponse); 
     }
 
     // публичный метод для получения массива карточек с сервера
     getInitialCardsApi() {
       return fetch(`${this._url}cards`, {
-        headers: {
-          authorization: 'a5c762bc-210a-4e68-9fc7-978e4674d050'
-        }
+        headers: this._headers,
       })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-    });
+      .then(this._checkResponse);
     }
 
     // отправка обновлённых данных о пользователе на сервер
   patchUserInfo({ name, about }) {
     return fetch(`${this._url}users/me`, {
       method: 'PATCH',
-      headers: {
-      authorization: 'a5c762bc-210a-4e68-9fc7-978e4674d050',
-      'Content-Type': 'application/json'
-    },
+      headers: this._headers,
     body: JSON.stringify({
     name: name,
     about: about,
     })
   })
-  .then((res) => {
-    if (res.ok) {
-      return res.json();
-      }
-    // если ошибка, отклоняем промис
-     return Promise.reject(`Ошибка: ${res.status}`);
-    })
+  .then(this._checkResponse);
   }
 
   //  отправка ссылки на новый аватар
   patchUserAvatar( { avatar: link } ) {
     return fetch(`${this._url}users/me/avatar`, {
       method: 'PATCH',
-      headers: {
-      authorization: 'a5c762bc-210a-4e68-9fc7-978e4674d050',
-      'Content-Type': 'application/json'
-    },
+      headers: this._headers,
     body: JSON.stringify({
     avatar: link,
     })
     })
-    .then((res) => {
-    if (res.ok) {
-      return res.json();
-      }
-    // если ошибка, отклоняем промис
-     return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then(this._checkResponse);
   }
 
   // запрос на удаление карточки
   deleteCard(cardId) {
     return fetch(`${this._url}cards/${cardId}`, {
       method: 'DELETE',
-      headers: {
-        authorization: 'a5c762bc-210a-4e68-9fc7-978e4674d050',
-        'Content-Type': 'application/json'
-      }
+      headers: this._headers,
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      // если ошибка, отклоняем промис
-       return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then(this._checkResponse);
   }
 
     // добавление и удаление лайков
     toggleLikes(cardId, isLikes) {
         return fetch(`${this._url}cards/${cardId}/likes`, {
             method: isLikes ? 'DELETE' : 'PUT',
-            headers: {
-              authorization: 'a5c762bc-210a-4e68-9fc7-978e4674d050',
-              'Content-Type': 'application/json'
-            },
+            headers: this._headers,
         })
-             .then((res) => {
-              if (res.ok) {
-                return res.json();
-              }
-              // если ошибка, отклоняем промис
-               return Promise.reject(`Ошибка: ${res.status}`);
-            })
+        .then(this._checkResponse);
     }
 
     // метод для отправки данных карты
     postCard(item) {
        return fetch(`${this._url}cards`, {
             method: 'POST',
-            headers: {
-              authorization: 'a5c762bc-210a-4e68-9fc7-978e4674d050',
-              'Content-Type': 'application/json'
-            },
+            headers: this._headers,
             body: JSON.stringify({
               name: item.title,
               link: item.link,
             })
 
           })
-          .then((res) => {
-            if (res.ok) {
-              return res.json();
-            }
-            // если ошибка, отклоняем промис
-             return Promise.reject(`Ошибка: ${res.status}`);
-          })
+          .then(this._checkResponse);
     }
   }
